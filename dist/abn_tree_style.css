@@ -1,0 +1,61 @@
+ul.nav.nav-list.abn-tree i.indented {
+  padding: 2px;
+}
+.abn-tree-animate-enter {
+  transition: 150ms linear all;
+  position: relative;
+  display: block;
+  opacity: 0;
+  max-height: 0px;
+}
+.abn-tree-animate-enter.abn-tree-animate-enter-active {
+  opacity: 1;
+  max-height: 30px;
+}
+.abn-tree-animate-leave {
+  transition: 150ms linear all;
+  position: relative;
+  display: block;
+  max-height: 30px;
+  opacity: 1;
+}
+.abn-tree-animate-leave.abn-tree-animate-leave-active {
+  max-height: 0px;
+  opacity: 0;
+}
+ul.nav.nav-list.abn-tree .level-1 .indented {
+  position: relative;
+  left: 0px;
+}
+ul.nav.nav-list.abn-tree .level-2 .indented {
+  position: relative;
+  left: 20px;
+}
+ul.nav.nav-list.abn-tree .level-3 .indented {
+  position: relative;
+  left: 40px;
+}
+ul.nav.nav-list.abn-tree .level-4 .indented {
+  position: relative;
+  left: 60px;
+}
+ul.nav.nav-list.abn-tree .level-5 .indented {
+  position: relative;
+  left: 80px;
+}
+ul.nav.nav-list.abn-tree .level-6 .indented {
+  position: relative;
+  left: 80px;
+}
+ul.nav.nav-list.abn-tree .level-7 .indented {
+  position: relative;
+  left: 100px;
+}
+ul.nav.nav-list.abn-tree .level-8 .indented {
+  position: relative;
+  left: 120px;
+}
+ul.nav.nav-list.abn-tree .level-9 .indented {
+  position: relative;
+  left: 140px;
+}
