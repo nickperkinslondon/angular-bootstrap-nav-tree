@@ -2,28 +2,43 @@
 app = angular.module 'AbnTest', ['angularBootstrapNavTree']
 app.controller 'AbnTestController',($scope)->
   
-  
+
+  #
+  # a default "on-select" handler can be specified
+  # for the tree ( as attribute "on-select" )
+  #   
   $scope.my_default_handler = (branch)->
     $scope.output = "You selected: "+branch.label
+    if branch.data?.description
+      $scope.output += '('+branch.data.description+')'
     #
-    # your handler can do anything here...
-    # 
-
-
-  apple_selected = (branch)->
-    $scope.output = "APPLE! : "+branch.label
-    #
-    # your handler can do anything here...
+    # This example handler just sets "output",
+    # ...but your handler could do anything here...
     # 
 
 
   #
-  # The TREE DATA
+  # Each branch can define an "on-select" handler,
+  # which will be called instead of the default handler
+  #
+
+  #
+  # a single handler can be used on several branches, like this:
+  # 
+  apple_selected = (branch)->
+    $scope.output = "APPLE! : "+branch.label
+    #
+    # ( your handler can do anything here )
+    # 
+
+
+  #
+  # Example TREE DATA : Animal,Vegetable,Mineral
   # 
   # Each branch can have the following attributes:
   #
   # label    : the displayed text for the branch
-  # children : an array of branches
+  # children : an array of branches ( or array of strings )
   # onSelect : a function to run when branch is selected
   # data     : a place to put your own data -- can be anything
   #
@@ -32,6 +47,11 @@ app.controller 'AbnTestController',($scope)->
     children:[
       label:'Dog'
       data:
+        #
+        # "data" is yours -- put anything in here
+        # you can read it back in your on-select handler
+        # as "branch.data"
+        # 
         description:"man's best friend"
     , 
       label:'Cat'
@@ -46,19 +66,19 @@ app.controller 'AbnTestController',($scope)->
       children:['White Leghorn','Rhode Island Red','Jersey Giant']        
     ]
   ,
+
     label:'Vegetable'
     data:
       definition:"A plant or part of a plant used as food, typically as accompaniment to meat or fish, such as a cabbage, potato, carrot, or bean."
       data_can_contain_anything:true
 
-    #
-    # a single branch can define it's own "on-select" handler:
-    #
     onSelect:(branch)->
+      # special "on-select" function for this branch
       $scope.output = "Fruit: "+branch.data.definition
 
-
     children:[
+      label:'Oranges'
+    ,
       label:'Apples'
       children:[
         label:'Granny Smith'
@@ -70,14 +90,13 @@ app.controller 'AbnTestController',($scope)->
         label:'Fuji'
         onSelect:apple_selected
       ]
-    ,
-      label:'Oranges'
     ]
   ,
     label:'Mineral'
-    # children can be simply a list of strings:
     children:[
       label:'Rock'
+      # children can be simply a list of strings
+      # if you are in a hurry
       children:['Igneous','Sedimentary','Metamorphic']
     ,
       label:'Metal'
