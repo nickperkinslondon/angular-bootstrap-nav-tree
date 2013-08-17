@@ -1,63 +1,57 @@
 
-module.exports = (grunt)->	
+module.exports = (grunt)->  
 
-	grunt.initConfig
+  grunt.initConfig
 
-		pkg: grunt.file.readJSON 'package.json'
+    pkg: grunt.file.readJSON 'package.json'
 
-		jade:
-			dist:
-				options:
-					pretty:true
-				files:[
-					expand:true
-					src:'src/*.jade'
-					dest:'dist'
-					ext:'*.html'
-				]
-		
-		less:
-			config:
-				options:
-					bare:true
-				files:[
-					expand:true
-					src:['src/*.less']
-					dest:'dist'
-				]
-			dev:
-				files:
-					'main.css':'main.less'
-
-		coffee:
-			config:
-				options:
-					bare:true
-				files:[
-					expand:true
-					src:'src/*.coffee'
-					dest:'./dist'					
-				]
+    jade:
+      dev:
+        options:
+          pretty:true
+        files:
+          'dist/abn_tree_template.html':'src/abn_tree_template.jade'
+          'test/test_abn_tree.html':'src/test_abn_tree.jade'
+    
+    less:
+      dev:
+        options:
+          compress:false
+        files:
+          'dist/abn_tree_style.css':'src/abn_tree_style.less'
 
 
-		watch:
-			jade:
-				files:['**/*.jade']
-				tasks:['jade']
-			less:
-				files:['**/*.less']
-				tasks:['less']
-			coffee:
-			 	files:['**/*.coffee']
-			 	tasks:['coffee']
-
-	grunt.loadNpmTasks 'grunt-contrib-jade'
-	grunt.loadNpmTasks 'grunt-contrib-less'
-	grunt.loadNpmTasks 'grunt-contrib-coffee'
-	grunt.loadNpmTasks 'grunt-contrib-watch'
-
-	grunt.registerTask 'default', ['jade','less','coffee']
+    coffee:
+      dev:
+        options:
+          bare:true
+        files:
+          'dist/abn_tree_directive.js':'src/abn_tree_directive.coffee'
+          'test/test_abn_tree.js':'src/test_abn_tree.coffee'
 
 
+    watch:
+      jade:
+        files:['**/*.jade']
+        tasks:['jade']
+        options:
+          livereload:true
+      less:
+        files:['**/*.less']
+        tasks:['less']
+        options:
+          livereload:true
 
+      coffee:
+        files:['**/*.coffee']
+        tasks:['coffee']
+        options:
+          livereload:true
+
+  grunt.loadNpmTasks 'grunt-contrib-jade'
+  grunt.loadNpmTasks 'grunt-contrib-less'
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
+
+  grunt.registerTask 'default', ['jade','less','coffee']
 
