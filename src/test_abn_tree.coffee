@@ -58,7 +58,7 @@ app.controller 'AbnTestController',($scope)->
       data:
         description:"spawn of satan"
     ,
-      label:'Hippopotomus'
+      label:'Hippopotamus'
       data:
         description:"hungry, hungry"
     ,

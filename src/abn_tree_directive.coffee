@@ -11,13 +11,11 @@ module.directive 'abnTree',($timeout)->
 
   link:(scope,element,attrs)->
 
-
-    attrs.iconExpand   ?= 'icon-plus'
+    # default values
+    attrs.iconExpand   ?= 'icon-plus'    
     attrs.iconCollapse ?= 'icon-minus'
     attrs.iconLeaf     ?= 'icon-chevron-right'
     attrs.expandLevel  ?= '3'
-
-
 
     expand_level = parseInt attrs.expandLevel,10
 
@@ -50,8 +48,6 @@ module.directive 'abnTree',($timeout)->
     # if children is just a list of strings...
     # ...change them into objects:
     # 
-
-
     for_each_branch (branch)->
       if branch.children
         if branch.children.length > 0
@@ -65,25 +61,14 @@ module.directive 'abnTree',($timeout)->
         branch.children = []
 
 
-
-
     #
-    # expand to proper level
+    # expand to the proper level
     #
     for_each_branch (b,level)->
       b.level = level
       b.expanded = b.level < expand_level
       # give each Branch a UID ( to keep AngularJS happy )
       b.uid = ""+Math.random()
-
-    expand_all = ->
-      for_each_branch (branch)->
-        branch.expanded = true
-
-    unselect_all = ->
-      for_each_branch (branch)->
-        branch.selected = false
-
 
     
     #
@@ -92,23 +77,28 @@ module.directive 'abnTree',($timeout)->
     selected_branch = null
     select_branch = (branch)->
       if branch isnt selected_branch
-        unselect_all()
+        if selected_branch?
+          selected_branch.selected = false
         branch.selected = true
         selected_branch = branch
+        #
+        # check:
+        # 1) branch.onSeelct
+        # 2) tree.onSelect
+        #
         if branch.onSelect?
           #
-          # finish changing branches,
-          # ( so the new branch is highlighted ),
+          # use $timeout
+          # so that the branch becomes fully selected
+          # ( and highlighted )
           # before calling the "onSelect" function.
           #
           $timeout ->
             branch.onSelect(branch)
         else
-          #
-          # is there a default "onSelect" for this tree?
-          # 
           if scope.onSelect?
-            scope.onSelect({branch:branch})
+            $timeout ->
+              scope.onSelect({branch:branch})
 
 
     scope.user_clicks_branch = (branch)->
@@ -116,33 +106,29 @@ module.directive 'abnTree',($timeout)->
          select_branch(branch)
 
 
+    #
     # To make the Angular rendering simpler,
     #  ( and to avoid recursive templates )
-    #  we transform the TREE of data into a LIST of data
-    #  (that also includes a "level" for each element)
+    #  we transform the TREE of data into a LIST of data.
+    #  ( "tree_rows" )
     #
+    # We do this whenever data in the tree changes.
+    # The tree itself is bound to this list.
+    # 
     # Children of un-expanded parents are included, 
-    #  but are set to "visible:false" ( and filtered out during rendering )
-    # ( we could maybe just leave them out of the list altogether ?)
-  
-
-    #
-    # when tree data changes,
-    # re-create the "tree_rows" data that is used
-    # to actually render the tree
+    #  but are set to "visible:false" 
+    #  ( and then they filtered out during rendering )
     #
     scope.tree_rows = []
     on_treeData_change = ->
       
       scope.tree_rows = []
 
-      add_all = (level,branch,visible)->
-        #
-        # add_all: recursively add one branch
-        # and all of it's children to the list
-        #
-        #if branch.selected ?= true
-        #  select_branch(branch)
+      #
+      # add_branch_to_list: recursively add one branch
+      # and all of it's children to the list
+      #
+      add_branch_to_list = (level,branch,visible)->
 
         if not branch.expanded?
           branch.expanded = false
@@ -152,7 +138,6 @@ module.directive 'abnTree',($timeout)->
         # they will be rendered like:
         # <i class="icon-plus"></i>
         #
-
         if branch.children.length == 0 
           tree_icon = attrs.iconLeaf
         else
@@ -185,17 +170,20 @@ module.directive 'abnTree',($timeout)->
             # ( if parent is collapsed )
             # 
             child_visible = visible and branch.expanded
-            add_all level+1, child, child_visible
+            add_branch_to_list level+1, child, child_visible
 
       #
       # start with root branches,
       # and recursively add all children to the list
       #
       for root_branch in scope.treeData        
-        add_all 1, root_branch, true
+        add_branch_to_list 1, root_branch, true
 
 
-
+    #
+    # initial-selection="Branch Label"
+    # if specified, find and select the branch:
+    #
     if attrs.initialSelection?
       for_each_branch (b)->
         if b.label == attrs.initialSelection
