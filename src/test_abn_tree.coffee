@@ -75,6 +75,7 @@ app.controller 'AbnTestController',($scope)->
     onSelect:(branch)->
       # special "on-select" function for this branch
       $scope.output = "Vegetable: "+branch.data.definition
+      
 
     children:[
       label:'Oranges'

@@ -45,7 +45,7 @@ app.controller('AbnTestController', function($scope) {
         data_can_contain_anything: true
       },
       onSelect: function(branch) {
-        return $scope.output = "Fruit: " + branch.data.definition;
+        return $scope.output = "Vegetable: " + branch.data.definition;
       },
       children: [
         {
