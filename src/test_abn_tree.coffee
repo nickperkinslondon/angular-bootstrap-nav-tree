@@ -117,3 +117,13 @@ app.controller 'AbnTestController',($scope)->
 
   ]
 
+
+
+  $scope.change = ()->
+    debugger
+    $scope.example_treedata = [
+      label:'Animal'
+      children:['Cat','Dog']
+    ]
+
+

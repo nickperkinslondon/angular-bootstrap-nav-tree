@@ -14,7 +14,7 @@ app.controller('AbnTestController', function($scope) {
   apple_selected = function(branch) {
     return $scope.output = "APPLE! : " + branch.label;
   };
-  return $scope.example_treedata = [
+  $scope.example_treedata = [
     {
       label: 'Animal',
       children: [
@@ -90,4 +90,13 @@ app.controller('AbnTestController', function($scope) {
       ]
     }
   ];
+  return $scope.change = function() {
+    debugger;
+    return $scope.example_treedata = [
+      {
+        label: 'Animal',
+        children: ['Cat', 'Dog']
+      }
+    ];
+  };
 });

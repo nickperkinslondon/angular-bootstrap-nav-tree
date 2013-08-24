@@ -44,22 +44,6 @@ module.directive 'abnTree',($timeout)->
         do_f(root_branch,1)
 
 
-    #
-    # if children is just a list of strings...
-    # ...change them into objects:
-    # 
-    for_each_branch (branch)->
-      if branch.children
-        if branch.children.length > 0
-          branch.children = branch.children.map (e)->
-            if typeof e == 'string'
-              label:e
-              children:[]
-            else
-              e
-      else
-        branch.children = []
-
 
     #
     # expand to the proper level
@@ -67,8 +51,6 @@ module.directive 'abnTree',($timeout)->
     for_each_branch (b,level)->
       b.level = level
       b.expanded = b.level < expand_level
-      # give each Branch a UID ( to keep AngularJS happy )
-      b.uid = ""+Math.random()
 
     
     #
@@ -124,6 +106,30 @@ module.directive 'abnTree',($timeout)->
       
       scope.tree_rows = []
 
+
+
+      #
+      # if "children" is just a list of strings...
+      # ...change them into objects:
+      # 
+      for_each_branch (branch)->
+        if branch.children
+          if branch.children.length > 0
+            branch.children = branch.children.map (e)->
+              if typeof e == 'string'
+                label:e
+                children:[]
+              else
+                e
+        else
+          branch.children = []
+
+      # give each Branch a UID ( to keep AngularJS happy )
+      for_each_branch (b,level)->
+        if not b.uid
+          b.uid = ""+Math.random()
+
+
       #
       # add_branch_to_list: recursively add one branch
       # and all of it's children to the list
@@ -138,7 +144,7 @@ module.directive 'abnTree',($timeout)->
         # they will be rendered like:
         # <i class="icon-plus"></i>
         #
-        if branch.children.length == 0 
+        if not branch.children or branch.children.length == 0 
           tree_icon = attrs.iconLeaf
         else
           if branch.expanded

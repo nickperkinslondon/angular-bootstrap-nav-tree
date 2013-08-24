@@ -48,7 +48,7 @@ module.exports = (grunt)->
         options:
           livereload:true
 
-  grunt.loadNpmTasks 'jade'
+  grunt.loadNpmTasks 'grunt-contrib-jade'
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
