@@ -18,9 +18,9 @@ This tree is developed in CoffeeScript, Jade, and Less, but you don't need to be
 How to use it:
 Just include the 3 files from "dist":
 
-    abn_tree_directive.js
-    abn_tree_style.css
-    abn_tree_template.html
+    abn_tree.js
+    abn_tree.css
+    abn_tree.html
 
 NOTE: you will have to adjust the "templateUrl" in the directive js, to adjust for your directory structure.
 
