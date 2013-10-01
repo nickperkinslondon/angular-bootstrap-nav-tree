@@ -25,7 +25,19 @@ module.exports = (grunt)->
           bare:true
         files:
           'dist/abn_tree.js':'src/abn_tree.coffee'
+          'dist/abn_tree_tpls.js':'src/abn_tree_tpls.coffee'
           'test/test_abn_tree.js':'src/test_abn_tree.coffee'
+
+    replace:
+      dev:
+        src: ['dist/abn_tree_tpls.js']
+        overwrite: true
+        replacements: [
+          from: 'ABN_TREE_TEMPLATE'
+          to: do () ->
+            res = grunt.file.read 'dist/abn_tree.html'
+            res.replace(/\n/g, '\\n').replace /\'/g, '\\\''
+        ]
 
     watch:
       jade:
@@ -45,9 +57,10 @@ module.exports = (grunt)->
         options:
           livereload:true
 
+  grunt.loadNpmTasks 'grunt-text-replace'
   grunt.loadNpmTasks 'grunt-contrib-jade'
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'default', ['jade','less','coffee']
+  grunt.registerTask 'default', ['jade','less','coffee','replace']
