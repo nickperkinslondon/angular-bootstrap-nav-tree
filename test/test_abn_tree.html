@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="AbnTest">
+<html data-ng-app="AbnTest">
   <head>
     <!-- Bootstrap 2-->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
@@ -18,8 +18,8 @@
     <!-- js for this test page:-->
     <script src="../test/test_abn_tree.js"></script>
   </head>
-  <body ng-controller="AbnTestController">
-    <button ng-click="change()">Change</button>
+  <body data-ng-controller="AbnTestController">
+    <button data-ng-click="change()">Change</button>
     <div class="row">
       <div class="span2"></div>
       <div class="span10">
@@ -31,7 +31,7 @@
     <div class="row">
       <div class="span2"></div>
       <div class="span4 well">
-        <abn-tree header="This is the example tree" tree-data="example_treedata" icon-leaf="icon-file" on-select="my_default_handler(branch)" expand-level="2" initial-selection="Vegetable"></abn-tree>
+        <div data-abn-tree header="This is the example tree" tree-data="example_treedata" icon-leaf="icon-file" on-select="my_default_handler(branch)" expand-level="2" initial-selection="Vegetable"></div>
       </div>
       <div class="span8 well">
         <div class="alert">{{ output }}</div>

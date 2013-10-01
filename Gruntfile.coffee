@@ -1,4 +1,3 @@
-
 module.exports = (grunt)->  
 
   grunt.initConfig
@@ -10,25 +9,23 @@ module.exports = (grunt)->
         options:
           pretty:true
         files:
-          'dist/abn_tree_template.html':'src/abn_tree_template.jade'
+          'dist/abn_tree.html':'src/abn_tree.jade'
           'test/test_abn_tree.html':'src/test_abn_tree.jade'
-    
+
     less:
       dev:
         options:
           compress:false
         files:
-          'dist/abn_tree_style.css':'src/abn_tree_style.less'
-
+          'dist/abn_tree.css':'src/abn_tree.less'
 
     coffee:
       dev:
         options:
           bare:true
         files:
-          'dist/abn_tree_directive.js':'src/abn_tree_directive.coffee'
+          'dist/abn_tree.js':'src/abn_tree.coffee'
           'test/test_abn_tree.js':'src/test_abn_tree.coffee'
-
 
     watch:
       jade:
@@ -54,4 +51,3 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.registerTask 'default', ['jade','less','coffee']
-

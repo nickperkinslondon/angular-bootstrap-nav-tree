@@ -1,5 +1,5 @@
 !!!5
-html(ng-app='AbnTest')
+html(data-ng-app='AbnTest')
   head
 
     // Bootstrap 2
@@ -27,9 +27,9 @@ html(ng-app='AbnTest')
 
 
         
-  body(ng-controller='AbnTestController')
+  body(data-ng-controller='AbnTestController')
 
-    button(ng-click="change()") Change
+    button(data-ng-click="change()") Change
 
     .row
       .span2
@@ -45,7 +45,8 @@ html(ng-app='AbnTest')
       .span2
       .span4.well
 
-        abn-tree(
+        div(
+          data-abn-tree
           header="This is the example tree"
           tree-data="example_treedata"
           icon-leaf='icon-file'         
