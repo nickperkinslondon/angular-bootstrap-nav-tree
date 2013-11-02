@@ -3,7 +3,8 @@ module = angular.module 'angularBootstrapNavTree',[]
 
 module.directive 'abnTree',($timeout)-> 
   restrict:'E'
-  templateUrl:'../dist/abn_tree_template.html'  # FIXME?
+  templateUrl: '../dist/abn_tree_template.html'
+
   scope:
     treeData:'='
     onSelect:'&'
@@ -24,11 +25,16 @@ module.directive 'abnTree',($timeout)->
     # check args
     if !scope.treeData
       alert 'no treeData defined for the tree!'
+      debugger
+      return
+
     if !scope.treeData.length?
       if treeData.label?
         scope.treeData = [ treeData ]
       else
         alert 'treeData should be an array of root branches'
+        debugger
+        return
 
 
     #

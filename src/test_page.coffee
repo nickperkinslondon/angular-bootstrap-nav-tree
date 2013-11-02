@@ -2,12 +2,11 @@
 app = angular.module 'AbnTest', ['angularBootstrapNavTree']
 app.controller 'AbnTestController',($scope)->
   
-
   #
   # a default "on-select" handler can be specified
   # for the tree ( as attribute "on-select" )
   #   
-  $scope.my_default_handler = (branch)->
+  $scope.my_tree_handler = (branch)->
     $scope.output = "You selected: "+branch.label
     if branch.data?.description
       $scope.output += '('+branch.data.description+')'
@@ -56,7 +55,7 @@ app.controller 'AbnTestController',($scope)->
     , 
       label:'Cat'
       data:
-        description:"spawn of satan"
+        description:"Felis catus"
     ,
       label:'Hippopotamus'
       data:
@@ -118,9 +117,7 @@ app.controller 'AbnTestController',($scope)->
   ]
 
 
-
-  $scope.change = ()->
-    debugger
+  $scope.try_changing_the_tree_data = ()->
     $scope.example_treedata = [
       label:'Animal'
       children:['Cat','Dog']

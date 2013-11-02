@@ -1,54 +1,75 @@
-ul.nav.nav-list.abn-tree i.indented {
-  padding:2px;
+/* 
+   abn-tree.css
+
+   style for the angular-bootstrap-nav-tree
+   for both Bootstrap 2 and Bootstrap 3
+
+*/
+
+ul.abn-tree li.abn-tree-row {  
+  padding: 0px;
+  margin:0px;
 }
-//ul.nav.nav-list.abn-tree i.indented:hover {
-//  border-radius: 3px;
-//  color: black;
-//  background: blue;
-//}
+
+ul.abn-tree li.abn-tree-row a {
+  padding: 3px 10px;
+}
+
+ul.abn-tree i.indented {
+  padding: 2px;
+}
+
 .abn-tree-animate-enter {
   transition: 150ms linear all;
   position: relative;
   display: block;
   opacity: 0;
-  max-height: 0px;
+  max-height:0px;
 }
 .abn-tree-animate-enter.abn-tree-animate-enter-active {
   opacity: 1;
-  max-height: 30px;
+  max-height:30px;
 }
+
 .abn-tree-animate-leave {
   transition: 150ms linear all;
   position: relative;
   display: block;
+  height:30px;
   max-height: 30px;
   opacity: 1;
 }
-.abn-tree-animate-leave.abn-tree-animate-leave-active {
-  max-height: 0px;
+.abn-tree-animate-leave.abn-tree-animate-leave-active {  
+  height: 0px;
+  max-height:0px;
   opacity: 0;
 }
-ul.nav.nav-list.abn-tree .level-1 .indented {
+
+
+.abn-tree {
+  cursor: pointer;
+}
+ul.nav.abn-tree .level-1 .indented {
   position: relative;
   left: 0px;
 }
-ul.nav.nav-list.abn-tree .level-2 .indented {
+ul.nav.abn-tree .level-2 .indented {
   position: relative;
   left: 20px;
 }
-ul.nav.nav-list.abn-tree .level-3 .indented {
+ul.nav.abn-tree .level-3 .indented {
   position: relative;
   left: 40px;
 }
-ul.nav.nav-list.abn-tree .level-4 .indented {
+ul.nav.abn-tree .level-4 .indented {
   position: relative;
   left: 60px;
 }
-ul.nav.nav-list.abn-tree .level-5 .indented {
+ul.nav.abn-tree .level-5 .indented {
   position: relative;
   left: 80px;
 }
-ul.nav.nav-list.abn-tree .level-6 .indented {
+ul.nav.abn-tree .level-6 .indented {
   position: relative;
   left: 80px;
 }

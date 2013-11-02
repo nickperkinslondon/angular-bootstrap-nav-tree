@@ -1,0 +1,95 @@
+!!!5
+html(ng-app='AbnTest')
+  head
+
+
+    ///
+    // Bootstrap 2 or Bootstrap 3 ?
+    //
+    if bs == "2"
+      link(rel="stylesheet",href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css")
+      //script(src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js")
+    if bs == "3"
+      link(rel="stylesheet",href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css")
+      //script(src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js")
+
+
+    // Angular JS 1.1.5
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js")
+    // NOTE: in 1.2, animations are different!
+    // ...will have to add support for 1.2!
+
+
+    // Font Awesome (optional)
+    link(href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css",rel="stylesheet")
+
+    // Live Reload ( for development )
+    script(src="http://localhost:35729/livereload.js")
+
+    ///
+    // abn-tree ( the thing we are testing )
+    //
+    script(src="../dist/abn_tree_directive.js")
+    // abn-tree style for Bootstrap 2 and Bootstrap 3 in same file:
+    link(rel='stylesheet',href='../dist/abn_tree.css')
+
+
+    // js for this test page:
+    script(src="../test/test_page.js")
+
+
+        
+  body(ng-controller='AbnTestController')
+
+    h1 Test Bootstrap #{bs}
+
+
+    // Grunt will generate 2 pages from this template:
+    // one for Bootrap 2, and one for Bootrap 3
+
+    if bs == "2"
+      a(href="bs3_test_page.html") Test Bootrap 3
+    if bs == "3"
+      a(href="bs2_test_page.html") Test Bootrap 2
+
+
+    br
+    br
+    a(href='',ng-click="try_changing_the_tree_data()") Change The Tree Definition
+
+
+    .row
+
+      // use both Bootrap 2 and Bootrap 3 attributes ( because it easier )
+
+      .span2.col-md-2
+
+      .span10.col-md-10
+        h2 angular-bootstrap-nav-tree
+        h6 by Nick Perkins
+        a(href='https://github.com/nickperkinslondon/angular-bootstrap-nav-tree') The code is on Github
+
+    .row
+      br
+
+
+    .row
+      .span2.col-md-2
+      .span4.col-md-4.well
+
+        abn-tree(
+          tree-data="example_treedata"
+          icon-leaf='icon-file'         
+          on-select="my_tree_handler(branch)"
+          expand-level="2"
+          initial-selection="Vegetable"
+          )
+
+
+      .span8.col-md-8.well
+
+        .alert.alert-warning {{ output }}
+        
+        //pre {{ example_treedata | json }}
+
+

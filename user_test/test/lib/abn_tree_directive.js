@@ -5,7 +5,7 @@ module = angular.module('angularBootstrapNavTree', []);
 module.directive('abnTree', function($timeout) {
   return {
     restrict: 'E',
-    templateUrl: '../dist/abn_tree_template.html',
+    templateUrl: '../lib/abn_tree_template.html',
     scope: {
       treeData: '=',
       onSelect: '&',
@@ -29,16 +29,12 @@ module.directive('abnTree', function($timeout) {
       scope.header = attrs.header;
       if (!scope.treeData) {
         alert('no treeData defined for the tree!');
-        debugger;
-        return;
       }
       if (scope.treeData.length == null) {
         if (treeData.label != null) {
           scope.treeData = [treeData];
         } else {
           alert('treeData should be an array of root branches');
-          debugger;
-          return;
         }
       }
       for_each_branch = function(f) {
@@ -64,9 +60,28 @@ module.directive('abnTree', function($timeout) {
         }
         return _results;
       };
+      for_each_branch(function(branch) {
+        if (branch.children) {
+          if (branch.children.length > 0) {
+            return branch.children = branch.children.map(function(e) {
+              if (typeof e === 'string') {
+                return {
+                  label: e,
+                  children: []
+                };
+              } else {
+                return e;
+              }
+            });
+          }
+        } else {
+          return branch.children = [];
+        }
+      });
       for_each_branch(function(b, level) {
         b.level = level;
-        return b.expanded = b.level < expand_level;
+        b.expanded = b.level < expand_level;
+        return b.uid = "" + Math.random();
       });
       selected_branch = null;
       select_branch = function(branch) {
@@ -100,35 +115,12 @@ module.directive('abnTree', function($timeout) {
       on_treeData_change = function() {
         var add_branch_to_list, root_branch, _i, _len, _ref, _results;
         scope.tree_rows = [];
-        for_each_branch(function(branch) {
-          if (branch.children) {
-            if (branch.children.length > 0) {
-              return branch.children = branch.children.map(function(e) {
-                if (typeof e === 'string') {
-                  return {
-                    label: e,
-                    children: []
-                  };
-                } else {
-                  return e;
-                }
-              });
-            }
-          } else {
-            return branch.children = [];
-          }
-        });
-        for_each_branch(function(b, level) {
-          if (!b.uid) {
-            return b.uid = "" + Math.random();
-          }
-        });
         add_branch_to_list = function(level, branch, visible) {
           var child, child_visible, tree_icon, _i, _len, _ref, _results;
           if (branch.expanded == null) {
             branch.expanded = false;
           }
-          if (!branch.children || branch.children.length === 0) {
+          if (branch.children.length === 0) {
             tree_icon = attrs.iconLeaf;
           } else {
             if (branch.expanded) {

@@ -11,14 +11,29 @@ module.exports = (grunt)->
           pretty:true
         files:
           'dist/abn_tree_template.html':'src/abn_tree_template.jade'
-          'test/test_abn_tree.html':'src/test_abn_tree.jade'
+          
+      #
+      # Generate 2 test pages:
+      # one for Bootstrap 2
+      # one for Bootstrap 3
+      # 
     
-    less:
-      dev:
-        options:
-          compress:false
+      bs2:
         files:
-          'dist/abn_tree_style.css':'src/abn_tree_style.less'
+          'test/bs2_test_page.html':'src/test_page.jade'
+        options:
+          pretty:true
+          data:
+            bs:"2"
+
+      bs3:
+        files:
+          'test/bs3_test_page.html':'src/test_page.jade'
+        options:
+          pretty:true
+          data:
+            bs:"3"
+
 
 
     coffee:
@@ -27,7 +42,7 @@ module.exports = (grunt)->
           bare:true
         files:
           'dist/abn_tree_directive.js':'src/abn_tree_directive.coffee'
-          'test/test_abn_tree.js':'src/test_abn_tree.coffee'
+          'test/test_page.js':'src/test_page.coffee'
 
 
     watch:
@@ -36,11 +51,13 @@ module.exports = (grunt)->
         tasks:['jade']
         options:
           livereload:true
-      less:
-        files:['**/*.less']
-        tasks:['less']
+
+      css:
+        files:['**/*.css'] 
+        tasks:[]     
         options:
           livereload:true
+
 
       coffee:
         files:['**/*.coffee']
@@ -49,9 +66,8 @@ module.exports = (grunt)->
           livereload:true
 
   grunt.loadNpmTasks 'grunt-contrib-jade'
-  grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'default', ['jade','less','coffee']
+  grunt.registerTask 'default', ['jade','coffee','watch']
 

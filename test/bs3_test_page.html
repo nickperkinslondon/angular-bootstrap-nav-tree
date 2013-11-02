@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="AbnTest">
+  <head>
+    <!--/-->
+    <!-- Bootstrap 2 or Bootstrap 3 ?-->
+    <!---->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+    <!--script(src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js")-->
+    <!-- Angular JS 1.1.5-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
+    <!-- NOTE: in 1.2, animations are different!-->
+    <!-- ...will have to add support for 1.2!-->
+    <!-- Font Awesome (optional)-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!-- Live Reload ( for development )-->
+    <script src="http://localhost:35729/livereload.js"></script>
+    <!--/-->
+    <!-- abn-tree ( the thing we are testing )-->
+    <!---->
+    <script src="../dist/abn_tree_directive.js"></script>
+    <!-- abn-tree style for Bootstrap 2 and Bootstrap 3 in same file:-->
+    <link rel="stylesheet" href="../dist/abn_tree.css">
+    <!-- js for this test page:-->
+    <script src="../test/test_page.js"></script>
+  </head>
+  <body ng-controller="AbnTestController">
+    <h1>Test Bootstrap 3</h1>
+    <!-- Grunt will generate 2 pages from this template:-->
+    <!-- one for Bootrap 2, and one for Bootrap 3--><a href="bs2_test_page.html">Test Bootrap 2</a><br><br><a href="" ng-click="try_changing_the_tree_data()">Change The Tree Definition</a>
+    <div class="row">
+      <!-- use both Bootrap 2 and Bootrap 3 attributes ( because it easier )-->
+      <div class="span2 col-md-2"></div>
+      <div class="span10 col-md-10">
+        <h2>angular-bootstrap-nav-tree</h2>
+        <h6>by Nick Perkins</h6><a href="https://github.com/nickperkinslondon/angular-bootstrap-nav-tree">The code is on Github</a>
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span2 col-md-2"></div>
+      <div class="span4 col-md-4 well">
+        <abn-tree tree-data="example_treedata" icon-leaf="icon-file" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Vegetable"></abn-tree>
+      </div>
+      <div class="span8 col-md-8 well">
+        <div class="alert alert-warning">{{ output }}</div>
+        <!--pre {{ example_treedata | json }}-->
+      </div>
+    </div>
+  </body>
+</html>
