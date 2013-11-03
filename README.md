@@ -8,7 +8,7 @@ example: http://nickperkinslondon.github.io/angular-bootstrap-nav-tree/test/bs2_
 
 The style is completely Bootstrap because the tree is actually just a Bootstrap "nav" list, with a few changes:  Indentation is added, expand/collapse icons are added, and Angular CSS animations are used during expand/collapse.
 
-<abn-tree> now works with either Bootsrap 2, or Bootstrap 3!
+The abn-tree now works Bootsrap 2, or Bootstrap 3, and with Angular 1.1.5 or 1.2.0
 
 The normal Glyphicons work well, but they appear black instead of blue.  Alternatively, you can use the Font Awesome icons, which look even better, and match the blue color of the text.
 
@@ -37,13 +37,13 @@ At a miniumum, you must supply `tree-data` :
 But there are other attributes to customize the tree:
 
     <abn-tree 
-        tree-data="example_treedata"
-        icon-leaf="icon-file"
-        icon-expand="icon-plus-sign"
-        icon-contract="icon-minus-sign"
-        on-select="my_tree_handler(branch)"
-        expand-level="2"
-        initial-selection="Vegetable">      
+        tree-data         = "example_treedata"
+        icon-leaf         = "icon-file"
+        icon-expand       = "icon-plus-sign"
+        icon-contract     = "icon-minus-sign"
+        on-select         = "my_tree_handler(branch)"
+        expand-level      = "2"
+        initial-selection = "Vegetable">      
     ></abn-tree>
 
 

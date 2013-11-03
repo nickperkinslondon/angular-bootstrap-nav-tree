@@ -1,0 +1,96 @@
+!!!5
+html(ng-app='AbnTest')
+	head
+
+
+		///
+		// Bootstrap 2 or Bootstrap 3 ?
+		//
+		if bs == "2"
+			link(rel="stylesheet",href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css")
+			//script(src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js")
+		if bs == "3"
+			link(rel="stylesheet",href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css")
+			//script(src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js")
+
+
+		//
+		// Angular JS:  1.1.5 or 1.2.0 ?
+		// ( NOTE: in 1.2, animations are completely different! )
+		//
+		if ng == "1.1.5"
+			script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js")
+		if ng == "1.2.0-rc.3"
+			script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js")
+			script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-animate.min.js")
+
+
+		// Font Awesome (optional)
+		link(href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css",rel="stylesheet")
+
+		// Live Reload ( for development )
+		script(src="http://localhost:35729/livereload.js")
+
+		///
+		// abn-tree ( the thing we are testing )
+		//
+		script(src="../dist/abn_tree_directive.js")
+		// abn-tree style for Bootstrap 2 and Bootstrap 3 in same file:
+		link(rel='stylesheet',href='../dist/abn_tree.css')
+
+
+		// js for this test page:
+		script(src="../test/test_page.js")
+
+
+		
+	body(
+		ng-controller='AbnTestController'
+		style="margin:20px"
+		)
+
+
+
+		h2 angular-bootstrap-nav-tree
+		h6 by Nick Perkins
+		a(href='https://github.com/nickperkinslondon/angular-bootstrap-nav-tree') The code is on Github
+
+
+		// All 4 of these pages are generated ( by Grunt ) 
+		// from this one jade file
+		hr
+
+		a(href='bs2_ng115_test_page.html') Bootstrap 2 / Angular 1.1.5
+		br
+		a(href='bs3_ng115_test_page.html') Bootstrap 3 / Angular 1.1.5
+		br
+		a(href='bs2_ng120_test_page.html') Bootstrap 2 / Angular 1.2.0
+		br
+		a(href='bs3_ng120_test_page.html') Bootstrap 3 / Angular 1.2.0
+
+		hr
+		h4 Bootstrap #{bs}
+		h4 Angular #{ng}
+		hr
+
+
+		table
+			tr
+				td
+					div(
+						style='width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;'
+						)
+						abn-tree(
+						tree-data="example_treedata"
+						icon-leaf='icon-file'         
+						on-select="my_tree_handler(branch)"
+						expand-level="2"
+						initial-selection="Vegetable"
+						)
+				td(style="padding:20px;vertical-align:top;")
+					.alert.alert-warning(style="width:300px") {{ output }}
+
+		br	
+		button.btn.btn-default.muted(ng-click="try_changing_the_tree_data()") Change The Tree Definition
+
+

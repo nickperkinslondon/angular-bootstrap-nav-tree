@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="AbnTest">
+  <head>
+    <!--/-->
+    <!-- Bootstrap 2 or Bootstrap 3 ?-->
+    <!---->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+    <!--script(src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js")-->
+    <!---->
+    <!-- Angular JS:  1.1.5 or 1.2.0 ?-->
+    <!-- ( NOTE: in 1.2, animations are completely different! )-->
+    <!---->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-animate.min.js"></script>
+    <!-- Font Awesome (optional)-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!-- Live Reload ( for development )-->
+    <script src="http://localhost:35729/livereload.js"></script>
+    <!--/-->
+    <!-- abn-tree ( the thing we are testing )-->
+    <!---->
+    <script src="../dist/abn_tree_directive.js"></script>
+    <!-- abn-tree style for Bootstrap 2 and Bootstrap 3 in same file:-->
+    <link rel="stylesheet" href="../dist/abn_tree.css">
+    <!-- js for this test page:-->
+    <script src="../test/test_page.js"></script>
+  </head>
+  <body ng-controller="AbnTestController" style="margin:20px">
+    <h2>angular-bootstrap-nav-tree</h2>
+    <h6>by Nick Perkins</h6>
+    <a href="https://github.com/nickperkinslondon/angular-bootstrap-nav-tree">The code is on Github</a>
+    <!-- All 4 of these pages are generated ( by Grunt ) -->
+    <!-- from this one jade file-->
+    <hr>
+    <a href="bs2_ng115_test_page.html">Bootstrap 2 / Angular 1.1.5</a>
+    <br>
+    <a href="bs3_ng115_test_page.html">Bootstrap 3 / Angular 1.1.5</a>
+    <br>
+    <a href="bs2_ng120_test_page.html">Bootstrap 2 / Angular 1.2.0</a>
+    <br>
+    <a href="bs3_ng120_test_page.html">Bootstrap 3 / Angular 1.2.0</a>
+    <hr>
+    <h4>Bootstrap 2</h4>
+    <h4>Angular 1.2.0-rc.3</h4>
+    <hr>
+    <table>
+      <tr>
+        <td>
+          <div style="width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;">
+            <abn-tree tree-data="example_treedata" icon-leaf="icon-file" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Vegetable"></abn-tree>
+          </div>
+        </td>
+        <td style="padding:20px;vertical-align:top;">
+          <div style="width:300px" class="alert alert-warning">{{ output }}</div>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <button ng-click="try_changing_the_tree_data()" class="btn btn-default muted">Change The Tree Definition</button>
+  </body>
+</html>
