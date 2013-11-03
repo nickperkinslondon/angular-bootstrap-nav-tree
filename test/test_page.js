@@ -1,6 +1,12 @@
-var app;
+var app, deps;
 
-app = angular.module('AbnTest', ['angularBootstrapNavTree']);
+deps = ['angularBootstrapNavTree'];
+
+if (angular.version.full.indexOf("1.2") >= 0) {
+  deps.push('ngAnimate');
+}
+
+app = angular.module('AbnTest', deps);
 
 app.controller('AbnTestController', function($scope) {
   var apple_selected;
@@ -93,8 +99,33 @@ app.controller('AbnTestController', function($scope) {
   return $scope.try_changing_the_tree_data = function() {
     return $scope.example_treedata = [
       {
-        label: 'Animal',
-        children: ['Cat', 'Dog']
+        label: 'North America',
+        children: [
+          {
+            label: 'Canada',
+            children: ['Toronto', 'Vancouver']
+          }, {
+            label: 'USA',
+            children: ['New York', 'Los Angeles']
+          }, {
+            label: 'Mexico',
+            children: ['Mexico City', 'Guadalajara']
+          }
+        ]
+      }, {
+        label: 'South America',
+        children: [
+          {
+            label: 'Venezuela',
+            children: ['Caracas', 'Maracaibo']
+          }, {
+            label: 'Brazil',
+            children: ['Sao Paulo', 'Rio de Janeiro']
+          }, {
+            label: 'Argentina',
+            children: ['Buenos Aires', 'Cordoba']
+          }
+        ]
       }
     ];
   };

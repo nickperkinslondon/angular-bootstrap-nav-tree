@@ -11,28 +11,54 @@ module.exports = (grunt)->
           pretty:true
         files:
           'dist/abn_tree_template.html':'src/abn_tree_template.jade'
+          'test/tests_page.html':'test/tests_page.jade'
           
       #
-      # Generate 2 test pages:
-      # one for Bootstrap 2
-      # one for Bootstrap 3
+      # Generate 4 test pages, for all combinations of:
+      # 
+      # Bootstrap 2 and 3
+      # Angular 1.1.5 and 1.2.0
       # 
     
-      bs2:
+      bs2_ng115_test_page:
         files:
-          'test/bs2_test_page.html':'src/test_page.jade'
+          'test/bs2_ng115_test_page.html':'test/test_page.jade'
         options:
           pretty:true
           data:
             bs:"2"
+            ng:"1.1.5"
 
-      bs3:
+      bs3_ng115_test_page:
         files:
-          'test/bs3_test_page.html':'src/test_page.jade'
+          'test/bs3_ng115_test_page.html':'test/test_page.jade'
         options:
           pretty:true
           data:
             bs:"3"
+            ng:"1.1.5"
+
+      bs2_ng120_test_page:
+        files:
+          'test/bs2_ng120_test_page.html':'test/test_page.jade'
+        options:
+          pretty:true
+          data:
+            bs:"2"
+            ng:"1.2.0-rc.3"
+
+      bs3_ng120_test_page:
+        files:
+          'test/bs3_ng120_test_page.html':'test/test_page.jade'
+        options:
+          pretty:true
+          data:
+            bs:"3"
+            ng:"1.2.0-rc.3"
+
+
+
+
 
 
 
@@ -42,7 +68,7 @@ module.exports = (grunt)->
           bare:true
         files:
           'dist/abn_tree_directive.js':'src/abn_tree_directive.coffee'
-          'test/test_page.js':'src/test_page.coffee'
+          'test/test_page.js':'test/test_page.coffee'
 
 
     watch:
