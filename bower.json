@@ -1,0 +1,25 @@
+{
+  "name": "angular-bootstrap-nav-tree",
+  "version": "1.0.0",
+  "authors": [
+    "Nick Perkins <nickperkinslondone@gmail.com>"
+  ],
+  "description": "This is a Tree directive for Angular JS apps that use Bootstrap CSS.",
+  "main": "abn_tree_directive.js",
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nickperkinslondon/angular-bootstrap-nav-tree",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  	"angular":  "~1.2.0"
+  }
+}
