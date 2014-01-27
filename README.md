@@ -1,4 +1,3 @@
-
 angular-bootstrap-nav-tree
 ==========================
 
@@ -40,7 +39,7 @@ But there are other attributes to customize the tree:
         tree-data         = "example_treedata"
         icon-leaf         = "icon-file"
         icon-expand       = "icon-plus-sign"
-        icon-contract     = "icon-minus-sign"
+        icon-collapse     = "icon-minus-sign"
         on-select         = "my_tree_handler(branch)"
         expand-level      = "2"
         initial-selection = "Vegetable">      
