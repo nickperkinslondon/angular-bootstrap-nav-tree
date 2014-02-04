@@ -4,7 +4,7 @@ module = angular.module 'angularBootstrapNavTree',[]
 module.directive 'abnTree',($timeout)-> 
   restrict:'E'
   templateUrl: '../dist/abn_tree_template.html'
-
+  replace:true
   scope:
     treeData:'='
     onSelect:'&'
