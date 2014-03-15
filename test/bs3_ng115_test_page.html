@@ -6,13 +6,11 @@
     <!---->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
     <!---->
-    <!-- Angular 1.1.5 or 1.2.0 ?-->
+    <!-- Angular 1.1.5 or 1.2.12 ?-->
     <!---->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
     <!-- Font Awesome (optional)-->
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!-- Live Reload ( for development )-->
-    <script src="http://localhost:35729/livereload.js"></script>
     <!--/-->
     <!-- abn-tree ( the thing we are testing )-->
     <!---->
@@ -34,16 +32,16 @@
           <hr>
           <ul class="nav nav-list list-group">
             <li>
-              <a href="bs2_ng115_test_page.html">Bootstrap 2 / Angular 1.1.5</a>
+              <a href="bs2_ng115_test_page.html">Bootstrap 2 / Angular 1.1</a>
             </li>
             <li>
-              <a href="bs3_ng115_test_page.html">Bootstrap 3 / Angular 1.1.5</a>
+              <a href="bs3_ng115_test_page.html">Bootstrap 3 / Angular 1.1</a>
             </li>
             <li>
-              <a href="bs2_ng120_test_page.html">Bootstrap 2 / Angular 1.2.0</a>
+              <a href="bs2_ng120_test_page.html">Bootstrap 2 / Angular 1.2</a>
             </li>
             <li>
-              <a href="bs3_ng120_test_page.html">Bootstrap 3 / Angular 1.2.0</a>
+              <a href="bs3_ng120_test_page.html">Bootstrap 3 / Angular 1.2</a>
             </li>
           </ul>
         </td>
@@ -56,7 +54,7 @@
             <tr>
               <td>
                 <div style="width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;">
-                  <abn-tree tree-data="example_treedata" icon-leaf="fa fa-file" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+                  <abn-tree tree-data="example_treedata" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
                 </div>
               </td>
               <td style="padding:20px;vertical-align:top;">

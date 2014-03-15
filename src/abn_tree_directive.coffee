@@ -20,11 +20,19 @@ module.directive 'abnTree',($timeout)->
       return undefined
 
 
-    # default values ( Font-Awesome 3 or 4 )
-    attrs.iconExpand   ?= 'fa fa-plus'    
-    attrs.iconCollapse ?= 'fa fa-minus'
-    attrs.iconLeaf     ?= 'fa fa-file'
+    # default values ( Font-Awesome 4 )
+    attrs.iconExpand   ?= 'icon-plus  glyphicon glyphicon-plus  fa fa-plus'    
+    attrs.iconCollapse ?= 'icon-minus glyphicon glyphicon-minus fa fa-minus'
+    attrs.iconLeaf     ?= 'icon-file  glyphicon glyphicon-file  fa fa-file'
+
+    # font-awesome 3 or just plain bootstrap
+    # attrs.iconExpand   ?= 'icon-plus'    
+    # attrs.iconCollapse ?= 'icon-minus'
+    # attrs.iconLeaf     ?= 'icon-file'
+
+
     attrs.expandLevel  ?= '3'
+
 
     expand_level = parseInt attrs.expandLevel,10
 

@@ -19,13 +19,13 @@ module.directive('abnTree', function($timeout) {
         return void 0;
       };
       if (attrs.iconExpand == null) {
-        attrs.iconExpand = 'fa fa-plus';
+        attrs.iconExpand = 'icon-plus  glyphicon glyphicon-plus  fa fa-plus';
       }
       if (attrs.iconCollapse == null) {
-        attrs.iconCollapse = 'fa fa-minus';
+        attrs.iconCollapse = 'icon-minus glyphicon glyphicon-minus fa fa-minus';
       }
       if (attrs.iconLeaf == null) {
-        attrs.iconLeaf = 'fa fa-file';
+        attrs.iconLeaf = 'icon-file  glyphicon glyphicon-file  fa fa-file';
       }
       if (attrs.expandLevel == null) {
         attrs.expandLevel = '3';

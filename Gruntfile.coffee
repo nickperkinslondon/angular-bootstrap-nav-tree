@@ -45,7 +45,7 @@ module.exports = (grunt)->
           pretty:true
           data:
             bs:"2"
-            ng:"1.2.0-rc.3"
+            ng:"1.2.12"
 
       bs3_ng120_test_page:
         files:
@@ -54,7 +54,7 @@ module.exports = (grunt)->
           pretty:true
           data:
             bs:"3"
-            ng:"1.2.0-rc.3"
+            ng:"1.2.12"
 
 
 
