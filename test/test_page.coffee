@@ -1,6 +1,5 @@
   
 
-
 deps = ['angularBootstrapNavTree']
 if angular.version.full.indexOf("1.2")>=0
   deps.push('ngAnimate')
@@ -48,7 +47,8 @@ app.controller 'AbnTestController',($scope)->
   # onSelect : a function to run when branch is selected
   # data     : a place to put your own data -- can be anything
   #
-  $scope.example_treedata = [
+
+  treedata_avm = [
     label:'Animal'
     children:[
       label:'Dog'
@@ -117,39 +117,45 @@ app.controller 'AbnTestController',($scope)->
         label:'Thermosetting Polymer'
         children:['polyester','polyurethane','vulcanized rubber','bakelite','urea-formaldehyde']
       ,
-      ]
-      
+      ]      
     ]
+  ]
 
+  treedata_geography =  [
+    label:'North America'
+    children:[
+      label:'Canada'
+      children:['Toronto','Vancouver']
+    ,
+      label:'USA'
+      children:['New York','Los Angeles']
+    ,
+      label:'Mexico'
+      children:['Mexico City','Guadalajara']
+    ]
+  ,
+    label:'South America'
+    children:[
+      label:'Venezuela'
+      children:['Caracas','Maracaibo']
+    ,
+      label:'Brazil'
+      children:['Sao Paulo','Rio de Janeiro']
+    ,
+      label:'Argentina'
+      children:['Buenos Aires','Cordoba']
+    ]
   ]
 
 
+  $scope.example_treedata = treedata_avm
   $scope.try_changing_the_tree_data = ()->
-    $scope.example_treedata = [
-      label:'North America'
-      children:[
-        label:'Canada'
-        children:['Toronto','Vancouver']
-      ,
-        label:'USA'
-        children:['New York','Los Angeles']
-      ,
-        label:'Mexico'
-        children:['Mexico City','Guadalajara']
-      ]
-    ,
-      label:'South America'
-      children:[
-        label:'Venezuela'
-        children:['Caracas','Maracaibo']
-      ,
-        label:'Brazil'
-        children:['Sao Paulo','Rio de Janeiro']
-      ,
-        label:'Argentina'
-        children:['Buenos Aires','Cordoba']
-      ]
-
-    ]
+    #
+    # switch between 2 sets of "treedata"
+    #
+    if $scope.example_treedata is treedata_avm
+      $scope.example_treedata = treedata_geography
+    else
+      $scope.example_treedata = treedata_avm
 
 
