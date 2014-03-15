@@ -24,7 +24,9 @@ html(ng-app='AbnTest')
 
 
 		// Font Awesome (optional)
-		link(href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css",rel="stylesheet")
+		//- link(href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css",rel="stylesheet")
+		link(href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css",rel="stylesheet")
+
 
 		// Live Reload ( for development )
 		script(src="http://localhost:35729/livereload.js")
@@ -47,8 +49,6 @@ html(ng-app='AbnTest')
 		ng-controller='AbnTestController'
 		style="margin:20px"
 		)
-
-
 
 		h2 angular-bootstrap-nav-tree
 		table
@@ -92,7 +92,7 @@ html(ng-app='AbnTest')
 									)
 									abn-tree(
 										tree-data         = "example_treedata"
-										icon-leaf         = "icon-file"
+										icon-leaf         = "fa fa-file"
 										on-select         = "my_tree_handler(branch)"
 										expand-level      = "2"
 										initial-selection = "Granny Smith"

@@ -45,6 +45,13 @@ But there are other attributes to customize the tree:
         initial-selection = "Vegetable">      
     ></abn-tree>
 
+The example uses Font-Awesome 3, but Font-Awsome 4 also works.
+Use the following syntax:
+
+    icon-leaf = "fa fa-file"
+    
+( in general, use spaces to apply multiple classes to icon elements )
+
 
 The data to create the tree is defined in your controller, and could be as simple as this:
 
