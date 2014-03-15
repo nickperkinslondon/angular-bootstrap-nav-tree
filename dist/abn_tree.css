@@ -105,17 +105,17 @@ ul.nav.abn-tree .level-5 .indented {
 }
 ul.nav.abn-tree .level-6 .indented {
   position: relative;
-  left: 80px;
+  left: 100px;
 }
 ul.nav.nav-list.abn-tree .level-7 .indented {
   position: relative;
-  left: 100px;
+  left: 120px;
 }
 ul.nav.nav-list.abn-tree .level-8 .indented {
   position: relative;
-  left: 120px;
+  left: 140px;
 }
 ul.nav.nav-list.abn-tree .level-9 .indented {
   position: relative;
-  left: 140px;
+  left: 160px;
 }
