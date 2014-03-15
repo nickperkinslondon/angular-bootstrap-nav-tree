@@ -9,7 +9,7 @@ if (angular.version.full.indexOf("1.2") >= 0) {
 app = angular.module('AbnTest', deps);
 
 app.controller('AbnTestController', function($scope) {
-  var apple_selected;
+  var apple_selected, treedata_avm, treedata_geography;
   $scope.my_tree_handler = function(branch) {
     var _ref;
     $scope.output = "You selected: " + branch.label;
@@ -20,7 +20,7 @@ app.controller('AbnTestController', function($scope) {
   apple_selected = function(branch) {
     return $scope.output = "APPLE! : " + branch.label;
   };
-  $scope.example_treedata = [
+  treedata_avm = [
     {
       label: 'Animal',
       children: [
@@ -96,37 +96,43 @@ app.controller('AbnTestController', function($scope) {
       ]
     }
   ];
+  treedata_geography = [
+    {
+      label: 'North America',
+      children: [
+        {
+          label: 'Canada',
+          children: ['Toronto', 'Vancouver']
+        }, {
+          label: 'USA',
+          children: ['New York', 'Los Angeles']
+        }, {
+          label: 'Mexico',
+          children: ['Mexico City', 'Guadalajara']
+        }
+      ]
+    }, {
+      label: 'South America',
+      children: [
+        {
+          label: 'Venezuela',
+          children: ['Caracas', 'Maracaibo']
+        }, {
+          label: 'Brazil',
+          children: ['Sao Paulo', 'Rio de Janeiro']
+        }, {
+          label: 'Argentina',
+          children: ['Buenos Aires', 'Cordoba']
+        }
+      ]
+    }
+  ];
+  $scope.example_treedata = treedata_avm;
   return $scope.try_changing_the_tree_data = function() {
-    return $scope.example_treedata = [
-      {
-        label: 'North America',
-        children: [
-          {
-            label: 'Canada',
-            children: ['Toronto', 'Vancouver']
-          }, {
-            label: 'USA',
-            children: ['New York', 'Los Angeles']
-          }, {
-            label: 'Mexico',
-            children: ['Mexico City', 'Guadalajara']
-          }
-        ]
-      }, {
-        label: 'South America',
-        children: [
-          {
-            label: 'Venezuela',
-            children: ['Caracas', 'Maracaibo']
-          }, {
-            label: 'Brazil',
-            children: ['Sao Paulo', 'Rio de Janeiro']
-          }, {
-            label: 'Argentina',
-            children: ['Buenos Aires', 'Cordoba']
-          }
-        ]
-      }
-    ];
+    if ($scope.example_treedata === treedata_avm) {
+      return $scope.example_treedata = treedata_geography;
+    } else {
+      return $scope.example_treedata = treedata_avm;
+    }
   };
 });

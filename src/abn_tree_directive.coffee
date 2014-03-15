@@ -1,6 +1,7 @@
 
 module = angular.module 'angularBootstrapNavTree',[]
 
+
 module.directive 'abnTree',($timeout)-> 
   restrict:'E'
   templateUrl: '../dist/abn_tree_template.html'
@@ -8,9 +9,16 @@ module.directive 'abnTree',($timeout)->
   scope:
     treeData:'='
     onSelect:'&'
-    initialSelection:'='
+    initialSelection:'@'
 
   link:(scope,element,attrs)->
+
+
+    error = (s) ->
+      console.log 'ERROR:'+s
+      debugger
+      return undefined
+
 
     # default values
     attrs.iconExpand   ?= 'icon-plus'    
@@ -25,7 +33,6 @@ module.directive 'abnTree',($timeout)->
     # check args
     if !scope.treeData
       alert 'no treeData defined for the tree!'
-      debugger
       return
 
     if !scope.treeData.length?
@@ -33,7 +40,6 @@ module.directive 'abnTree',($timeout)->
         scope.treeData = [ treeData ]
       else
         alert 'treeData should be an array of root branches'
-        debugger
         return
 
 
@@ -64,14 +70,25 @@ module.directive 'abnTree',($timeout)->
     # 
     selected_branch = null
     select_branch = (branch)->
+
+      if not branch
+        if selected_branch?
+          selected_branch.selected = false
+        selected_branch = null
+        return
+
       if branch isnt selected_branch
         if selected_branch?
           selected_branch.selected = false
+
         branch.selected = true
         selected_branch = branch
+        expand_all_parents(branch)
+
+
         #
         # check:
-        # 1) branch.onSeelct
+        # 1) branch.onSelect
         # 2) tree.onSelect
         #
         if branch.onSelect?
@@ -94,6 +111,26 @@ module.directive 'abnTree',($timeout)->
          select_branch(branch)
 
 
+    get_parent = (child)->
+      parent = undefined
+      if child.parent_uid
+        for_each_branch (b)->
+          if b.uid == child.parent_uid
+            parent = b
+      return parent
+
+    for_all_ancestors = ( child, fn )->
+      parent = get_parent( child )
+      if parent?
+        fn( parent )
+        for_all_ancestors( parent, fn )
+
+
+    expand_all_parents = ( child )->
+      for_all_ancestors child, (b)->
+        b.expanded = true
+
+
     #
     # To make the Angular rendering simpler,
     #  ( and to avoid recursive templates )
@@ -109,10 +146,23 @@ module.directive 'abnTree',($timeout)->
     #
     scope.tree_rows = []
     on_treeData_change = ->
-      
+
+
+      # give each Branch a UID ( to keep AngularJS happy )
+      for_each_branch (b,level)->
+        if not b.uid
+          b.uid = ""+Math.random()
+      console.log 'UIDs are set.'
+
+
+      # set all parents:
+      for_each_branch (b)->
+        if angular.isArray b.children
+          for child in b.children
+            child.parent_uid = b.uid
+
+
       scope.tree_rows = []
-
-
 
       #
       # if "children" is just a list of strings...
@@ -130,12 +180,7 @@ module.directive 'abnTree',($timeout)->
         else
           branch.children = []
 
-      # give each Branch a UID ( to keep AngularJS happy )
-      for_each_branch (b,level)->
-        if not b.uid
-          b.uid = ""+Math.random()
-
-
+      
       #
       # add_branch_to_list: recursively add one branch
       # and all of it's children to the list
@@ -157,8 +202,6 @@ module.directive 'abnTree',($timeout)->
             tree_icon = attrs.iconCollapse
           else
             tree_icon = attrs.iconExpand 
-
-
 
 
         #
@@ -193,16 +236,18 @@ module.directive 'abnTree',($timeout)->
 
 
     #
+    # make sure to do a "deep watch" on the tree data
+    # ( by passing "true" as the third arg )
+    #
+    scope.$watch 'treeData',on_treeData_change,true
+
+
+    #
     # initial-selection="Branch Label"
     # if specified, find and select the branch:
     #
     if attrs.initialSelection?
       for_each_branch (b)->
         if b.label == attrs.initialSelection
-          select_branch b
-
-    #
-    # make sure to do a "deep watch" on the tree data
-    # ( by passing "true" as the third arg )
-    #
-    scope.$watch 'treeData',on_treeData_change,true
+          $timeout ->
+            select_branch b
