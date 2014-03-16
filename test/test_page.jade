@@ -34,8 +34,7 @@ html(ng-app='AbnTest')
 		///
 		// abn-tree ( the thing we are testing )
 		//
-		script(src="../dist/abn_tree_directive.js")
-		// abn-tree style for Bootstrap 2 and Bootstrap 3 in same file:
+		script(src="../dist/abn_tree_directive.js")		
 		link(rel='stylesheet',href='../dist/abn_tree.css')
 
 
@@ -85,12 +84,83 @@ html(ng-app='AbnTest')
 
 					table
 						tr
-							td
+							td(style='vertical-align:top')
+
+								br	
+								button.btn.btn-default.btn-sm(
+									ng-click="try_changing_the_tree_data()"
+									) Change The Tree Definition
+
+								br	
+								button.btn.btn-default.btn-sm(
+									ng-click="try_async_load()"
+									) Load Tree Data Asynchronously
+
+								hr
+								h5 Test the Tree Control API:
+
+								br
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.select_first_branch()'
+									) First Branch
+								br
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.select_next_sibling()'
+									) Next Sibling
+								
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.select_prev_sibling()'
+									) Prev Sibling
+
+								br
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.select_next_branch()'
+									) Next Branch
+
+								
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.select_prev_branch()'
+									) Prev Branch
+
+								br
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.select_parent_branch()'
+									) Parent
+
+								hr
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.expand_branch()'
+									) Expand
+
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.collapse_branch()'
+									) Collapse
+
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.expand_all()'
+									) Expand All
+
+								button.btn.btn-default.btn-sm(
+									ng-click='my_tree.collapse_all()'
+									) Collapse All
+
+								hr
+								button.btn.btn-default.btn-sm(
+									ng-click='try_adding_a_branch()'
+									) Add Branch
+
+
+
+							td(style='vertical-align:top')
 								div(
 									style='width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;'
 									)
+
+									span(ng-if='doing_async') ...loading...
+									
 									abn-tree(
-										tree-data         = "example_treedata"
+										tree-data         = "my_data"
+										tree-control      = "my_tree"
 										on-select         = "my_tree_handler(branch)"
 										expand-level      = "2"
 										initial-selection = "Granny Smith"
@@ -100,10 +170,3 @@ html(ng-app='AbnTest')
 								.alert.alert-warning(
 									style="width:300px"
 									) {{ output }}
-
-					br	
-					button.btn.btn-default.muted(
-						ng-click="try_changing_the_tree_data()"
-						) Change The Tree Definition
-
-

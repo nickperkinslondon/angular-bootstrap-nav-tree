@@ -8,8 +8,8 @@ if (angular.version.full.indexOf("1.2") >= 0) {
 
 app = angular.module('AbnTest', deps);
 
-app.controller('AbnTestController', function($scope) {
-  var apple_selected, treedata_avm, treedata_geography;
+app.controller('AbnTestController', function($scope, $timeout) {
+  var apple_selected, tree, treedata_avm, treedata_geography;
   $scope.my_tree_handler = function(branch) {
     var _ref;
     $scope.output = "You selected: " + branch.label;
@@ -127,12 +127,37 @@ app.controller('AbnTestController', function($scope) {
       ]
     }
   ];
-  $scope.example_treedata = treedata_avm;
-  return $scope.try_changing_the_tree_data = function() {
-    if ($scope.example_treedata === treedata_avm) {
-      return $scope.example_treedata = treedata_geography;
+  $scope.my_data = treedata_avm;
+  $scope.try_changing_the_tree_data = function() {
+    if ($scope.my_data === treedata_avm) {
+      return $scope.my_data = treedata_geography;
     } else {
-      return $scope.example_treedata = treedata_avm;
+      return $scope.my_data = treedata_avm;
     }
+  };
+  $scope.my_tree = tree = {};
+  $scope.try_async_load = function() {
+    $scope.my_data = [];
+    $scope.doing_async = true;
+    return $timeout(function() {
+      if (Math.random() < 0.5) {
+        $scope.my_data = treedata_avm;
+      } else {
+        $scope.my_data = treedata_geography;
+      }
+      $scope.doing_async = false;
+      return tree.expand_all();
+    }, 1000);
+  };
+  return $scope.try_adding_a_branch = function() {
+    var b;
+    b = tree.get_selected_branch();
+    return tree.add_branch(b, {
+      label: 'New Branch',
+      data: {
+        something: 42,
+        "else": 43
+      }
+    });
   };
 });

@@ -6,7 +6,7 @@ if angular.version.full.indexOf("1.2")>=0
 
 
 app = angular.module 'AbnTest', deps
-app.controller 'AbnTestController',($scope)->
+app.controller 'AbnTestController',($scope,$timeout)->
   
   #
   # a default "on-select" handler can be specified
@@ -148,14 +148,43 @@ app.controller 'AbnTestController',($scope)->
   ]
 
 
-  $scope.example_treedata = treedata_avm
+  $scope.my_data = treedata_avm
   $scope.try_changing_the_tree_data = ()->
     #
     # switch between 2 sets of "treedata"
     #
-    if $scope.example_treedata is treedata_avm
-      $scope.example_treedata = treedata_geography
+    if $scope.my_data is treedata_avm
+      $scope.my_data = treedata_geography
     else
-      $scope.example_treedata = treedata_avm
+      $scope.my_data = treedata_avm
+
+
+  #
+  #  TREE-CONTROL:  the API for controlling the tree
+  #
+  $scope.my_tree = tree = {}
+  # just create an empty object, and pass it to the abn-tree as "tree-control"
+  # ...it will be populated with Tree API functions
+  
+
+  $scope.try_async_load = ()->
+    $scope.my_data = []
+    $scope.doing_async = true
+    $timeout ->
+      if Math.random() < 0.5
+        $scope.my_data = treedata_avm
+      else
+        $scope.my_data = treedata_geography
+      $scope.doing_async = false
+      tree.expand_all()
+    ,1000
+
+  $scope.try_adding_a_branch = ->
+    b = tree.get_selected_branch()
+    tree.add_branch b,
+      label:'New Branch'
+      data:
+        something:42
+        else:43
 
 

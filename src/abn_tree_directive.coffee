@@ -1,15 +1,15 @@
 
 module = angular.module 'angularBootstrapNavTree',[]
 
-
 module.directive 'abnTree',($timeout)-> 
   restrict:'E'
-  templateUrl: '../dist/abn_tree_template.html'
+  templateUrl: '../dist/abn_tree_template.html' # <--- CHANGE THIS
 
   scope:
     treeData:'='
     onSelect:'&'
     initialSelection:'@'
+    treeControl:'='
 
   link:(scope,element,attrs)->
 
@@ -20,23 +20,14 @@ module.directive 'abnTree',($timeout)->
       return undefined
 
 
-    # default values ( Font-Awesome 4 )
+    # default values ( Font-Awesome 3 or 4 or Glyphicons )
     attrs.iconExpand   ?= 'icon-plus  glyphicon glyphicon-plus  fa fa-plus'    
     attrs.iconCollapse ?= 'icon-minus glyphicon glyphicon-minus fa fa-minus'
     attrs.iconLeaf     ?= 'icon-file  glyphicon glyphicon-file  fa fa-file'
 
-    # font-awesome 3 or just plain bootstrap
-    # attrs.iconExpand   ?= 'icon-plus'    
-    # attrs.iconCollapse ?= 'icon-minus'
-    # attrs.iconLeaf     ?= 'icon-file'
-
-
     attrs.expandLevel  ?= '3'
 
-
     expand_level = parseInt attrs.expandLevel,10
-
-    scope.header = attrs.header
 
     # check args
     if !scope.treeData
@@ -65,12 +56,6 @@ module.directive 'abnTree',($timeout)->
 
 
 
-    #
-    # expand to the proper level
-    #
-    for_each_branch (b,level)->
-      b.level = level
-      b.expanded = b.level < expand_level
 
     
     #
@@ -155,6 +140,7 @@ module.directive 'abnTree',($timeout)->
     scope.tree_rows = []
     on_treeData_change = ->
 
+      #console.log 'tree-data-change!'
 
       # give each Branch a UID ( to keep AngularJS happy )
       for_each_branch (b,level)->
@@ -259,3 +245,223 @@ module.directive 'abnTree',($timeout)->
         if b.label == attrs.initialSelection
           $timeout ->
             select_branch b
+
+    #
+    # expand to the proper level
+    #
+    n = scope.treeData.length
+    console.log 'num root branches = '+n
+    for_each_branch (b,level)->
+      b.level = level
+      b.expanded = b.level < expand_level
+      #b.expanded = false
+
+
+    #
+    # TREE-CONTROL : the API to the Tree
+    #
+    #  if we have been given an Object for this,
+    #  then we attach all of tree-control functions 
+    #  to that given object:
+    #
+    if scope.treeControl?
+      if angular.isObject scope.treeControl
+        tree = scope.treeControl
+
+        tree.expand_all = ->
+          for_each_branch (b,level)->
+            b.expanded = true
+
+        tree.collapse_all = ->
+          for_each_branch (b,level)->
+            b.expanded = false
+
+        tree.get_first_branch = ->
+          n = scope.treeData.length
+          if n > 0
+            return scope.treeData[0]
+
+        tree.select_first_branch = ->
+          b = tree.get_first_branch()
+          tree.select_branch(b)
+
+        tree.get_selected_branch = ->
+          selected_branch
+
+        tree.get_parent_branch = (b)->
+          get_parent(b)
+
+        tree.select_branch = (b)->
+          select_branch(b)
+          b
+
+        tree.get_children = (b)->
+          b.children
+
+        tree.select_parent_branch = (b)->
+          if not b?
+            b = tree.get_selected_branch()
+          if b?
+            p = tree.get_parent_branch(b)
+            if p?
+              tree.select_branch(p)
+              p
+
+
+        tree.add_branch = (parent,new_branch)->
+          if parent?
+            parent.children.push new_branch
+            parent.expanded = true
+          else
+            scope.treeData.push new_branch
+          #tree.select new_branch
+          new_branch
+
+        tree.add_root_branch = (new_branch)->
+          tree.add_branch null, new_branch
+          new_branch
+
+        tree.expand_branch = (b)->
+          if not b?
+            b = tree.get_selected_branch()
+          if b?
+            b.expanded = true
+            b
+
+        tree.collapse_branch = (b)->
+          b ?= selected_branch
+          if b?
+            b.expanded = false
+            b
+
+
+        tree.get_siblings = (b)->
+          b ?= selected_branch
+          if b?
+            p = tree.get_parent_branch(b)
+            if p
+              siblings = p.children
+            else
+              siblings = scope.treeData # the root branches
+            return siblings
+
+
+        tree.get_next_sibling = (b)->
+          b ?= selected_branch
+          if b?
+            siblings = tree.get_siblings(b)
+            n = siblings.length
+            i = siblings.indexOf b
+            if i < n
+              return siblings[i+1]
+
+
+        tree.get_prev_sibling = (b)->
+          b ?= selected_branch
+          siblings = tree.get_siblings(b)
+          n = siblings.length
+          i = siblings.indexOf b
+          if i > 0
+            return siblings[i-1]
+
+
+        tree.select_next_sibling = (b)->
+          b ?= selected_branch
+          if b?
+            next = tree.get_next_sibling(b)
+            if next?
+              tree.select_branch next
+
+
+        tree.select_prev_sibling = (b)->
+          b ?= selected_branch
+          if b?
+            prev = tree.get_prev_sibling(b)
+            if prev?
+              tree.select_branch prev
+
+
+        tree.get_first_child = (b)->
+          b ?= selected_branch
+          if b?
+            if b.children?.length > 0
+              return b.children[0]
+
+
+        tree.get_closest_ancestor_next_sibling = (b)->
+          next = tree.get_next_sibling(b)
+          if next?
+            return next
+          else
+            parent = tree.get_parent_branch(b)
+            return tree.get_closest_ancestor_next_sibling(parent)
+
+
+
+
+        tree.get_next_branch = (b)->
+          #
+          # "next" in the sense of...vertically, from top to bottom
+          #
+          # try:
+          # 1) next sibling
+          # 2) first child
+          # 3) parent.get_next() // recursive
+          #
+          b ?= selected_branch
+          if b?
+            next = tree.get_first_child(b)
+            if next?
+              return next
+            else
+              next = tree.get_closest_ancestor_next_sibling(b)
+              return next
+
+
+        tree.select_next_branch = (b)->          
+          b ?= selected_branch
+          if b?
+            next = tree.get_next_branch(b)
+            if next?
+              tree.select_branch(next)
+              next
+
+
+        tree.last_descendant = (b)->
+          if not b?
+            debugger
+          n = b.children.length
+          if n == 0
+            return b
+          else
+            last_child = b.children[n-1]
+            return tree.last_descendant(last_child)
+
+
+        tree.get_prev_branch = (b)->
+          b ?= selected_branch
+          if b?
+            prev_sibling = tree.get_prev_sibling(b)
+            if prev_sibling?
+              return tree.last_descendant prev_sibling
+            else
+              parent = tree.get_parent_branch(b)
+              return parent
+
+        tree.select_prev_branch = (b)->
+          b ?= selected_branch
+          if b?
+            prev = tree.get_prev_branch(b)
+            if prev?
+              tree.select_branch(prev)
+              return prev
+
+
+
+
+
+
+
+
+
+
