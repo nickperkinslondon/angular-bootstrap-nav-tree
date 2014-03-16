@@ -6,6 +6,7 @@ module.directive('abnTree', function($timeout) {
   return {
     restrict: 'E',
     templateUrl: '../dist/abn_tree_template.html',
+    template: "{replace this with template html}",
     scope: {
       treeData: '=',
       onSelect: '&',

@@ -6,6 +6,7 @@
     "grunt": "~0.4.1",
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-watch": "~0.5.1",
-    "grunt-contrib-jade": "~0.8.0"
+    "grunt-contrib-jade": "~0.8.0",
+    "grunt-string-replace": "~0.2.7"
   }
 }

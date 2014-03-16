@@ -5,6 +5,8 @@ module.directive 'abnTree',($timeout)->
   restrict:'E'
   templateUrl: '../dist/abn_tree_template.html' # <--- CHANGE THIS
 
+  template: "{replace this with template html}"
+
   scope:
     treeData:'='
     onSelect:'&'
