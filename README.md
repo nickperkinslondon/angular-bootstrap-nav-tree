@@ -36,7 +36,8 @@ At a miniumum, you must supply `tree-data` :
 But there are other attributes to customize the tree:
 
     <abn-tree 
-        tree-data         = "example_treedata"
+        tree-data         = "my_treedata"
+        tree-control      = "my_tree"
         icon-leaf         = "icon-file"
         icon-expand       = "icon-plus-sign"
         icon-collapse     = "icon-minus-sign"
@@ -84,3 +85,5 @@ Each branch can have a "data" element which you can use to hold whatever data yo
 
 Warning: If you attach extra attributes directly to a branch (instead of to "branch.data"), they could conflict with the internal workings of the tree, which adds branch attributes at runtime, like "expanded" and "selected".
 
+Tree-Control API:
+If you pass an empty object to the tree as "tree-control", it will be populated with a set of functions for navigating and controlling the tree.  See the example page for a demo...
