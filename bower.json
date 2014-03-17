@@ -24,6 +24,6 @@
     ],
     "dependencies": {
         "angularjs": ">=1.0",
-        "twbs": ">=2.3"
+        "bootstrap": ">=2.3"
     }
 }
