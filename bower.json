@@ -23,7 +23,7 @@
         "README.md"
     ],
     "dependencies": {
-        "angularjs": ">=1.0",
+        "angular": ">=1.0",
         "twbs": ">=2.3"
     }
 }
