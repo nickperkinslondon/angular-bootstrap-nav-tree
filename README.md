@@ -3,7 +3,7 @@ angular-bootstrap-nav-tree
 
 This is a Tree directive for Angular JS apps that use Bootstrap CSS.
 
-example: http://nickperkinslondon.github.io/angular-bootstrap-nav-tree/test/bs2_ng115_test_page.html
+example: http://nickperkinslondon.github.io/angular-bootstrap-nav-tree/test/bs3_ng120_test_page.html
 
 The style is completely Bootstrap because the tree is actually just a Bootstrap "nav" list, with a few changes:  Indentation is added, expand/collapse icons are added, and Angular CSS animations are used during expand/collapse.
 
