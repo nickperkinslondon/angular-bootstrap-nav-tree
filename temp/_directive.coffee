@@ -15,7 +15,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
     </a>
   </li>
 </ul>""" # will be replaced by Grunt, during build, with the actual Template HTML
-
+  replace:true
   scope:
     treeData:'='
     onSelect:'&'

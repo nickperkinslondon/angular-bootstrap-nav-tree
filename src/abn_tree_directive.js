@@ -8,6 +8,7 @@ module.directive('abnTree', [
     return {
       restrict: 'E',
       template: "{html}",
+      replace: true,
       scope: {
         treeData: '=',
         onSelect: '&',

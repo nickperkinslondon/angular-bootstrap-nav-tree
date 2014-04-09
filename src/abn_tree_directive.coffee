@@ -7,7 +7,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
   #templateUrl: '../dist/abn_tree_template.html' # <--- another way to do this
 
   template: """{html}""" # will be replaced by Grunt, during build, with the actual Template HTML
-
+  replace:true
   scope:
     treeData:'='
     onSelect:'&'
