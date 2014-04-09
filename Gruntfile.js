@@ -82,7 +82,7 @@ module.exports = function(grunt) {
     coffee: {
       dev: {
         options: {
-          bare: true
+          bare: false
         },
         files: {
           'dist/abn_tree_directive.js': 'temp/_directive.coffee',
