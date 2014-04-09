@@ -154,9 +154,10 @@
             });
             scope.tree_rows = [];
             for_each_branch(function(branch) {
+              var child, f;
               if (branch.children) {
                 if (branch.children.length > 0) {
-                  return branch.children = branch.children.map(function(e) {
+                  f = function(e) {
                     if (typeof e === 'string') {
                       return {
                         label: e,
@@ -165,7 +166,17 @@
                     } else {
                       return e;
                     }
-                  });
+                  };
+                  return branch.children = (function() {
+                    var _i, _len, _ref, _results;
+                    _ref = branch.children;
+                    _results = [];
+                    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                      child = _ref[_i];
+                      _results.push(f(child));
+                    }
+                    return _results;
+                  })();
                 }
               } else {
                 return branch.children = [];

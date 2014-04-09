@@ -176,12 +176,15 @@ module.directive 'abnTree',['$timeout',($timeout)->
       for_each_branch (branch)->
         if branch.children
           if branch.children.length > 0
-            branch.children = branch.children.map (e)->
+            # don't use Array.map ( old browsers don't have it )
+            f = (e)->
               if typeof e == 'string'
                 label:e
                 children:[]
               else
                 e
+            branch.children = ( f(child) for child in branch.children )
+
         else
           branch.children = []
 
