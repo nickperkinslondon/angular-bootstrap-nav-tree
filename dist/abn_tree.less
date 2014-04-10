@@ -1,0 +1,108 @@
+/*
+   abn-tree.css
+
+   style for the angular-bootstrap-nav-tree
+   for both Bootstrap 2 and Bootstrap 3
+
+*/
+
+
+
+/* ------------------------------------------
+AngularJS Animations...
+
+The first selector is for Angular 1.1.5
+The second selector is for Angular 1.2.0
+
+*/
+.abn-tree-animate-enter,
+li.abn-tree-row.ng-enter {
+  transition: 200ms linear all;
+  position: relative;
+  display: block;
+  opacity: 0;
+  max-height:0px;
+}
+.abn-tree-animate-enter.abn-tree-animate-enter-active,
+li.abn-tree-row.ng-enter-active{
+  opacity: 1;
+  max-height:30px;
+}
+
+.abn-tree-animate-leave,
+li.abn-tree-row.ng-leave {
+  transition: 200ms linear all;
+  position: relative;
+  display: block;
+  height:30px;
+  max-height: 30px;
+  opacity: 1;
+}
+.abn-tree-animate-leave.abn-tree-animate-leave-active,
+li.abn-tree-row.ng-leave-active {
+  height: 0px;
+  max-height:0px;
+  opacity: 0;
+}
+
+
+/*
+------------------------------------------
+Angular 1.2.0 Animation
+*/
+
+
+.abn-tree-animate.ng-enter{
+
+}
+.abn-tree-animate.ng-enter{
+
+}
+
+
+
+
+/*
+   end animation stuff
+-----------------------------------------
+   begin normal css stuff
+*/
+ul.abn-tree li.abn-tree-row {
+  padding: 0px;
+  margin:0px;
+}
+
+ul.abn-tree li.abn-tree-row a {
+  padding: 3px 10px;
+}
+
+ul.abn-tree i.indented {
+  padding: 2px;
+}
+
+.abn-tree {
+  cursor: pointer;
+}
+
+/*
+------------------------------------------
+    generate classes for indentation
+*/
+
+@levels: 30;
+
+.loopingClass (@index) when (@index >= 0) {
+  ul.nav.nav-list.abn-tree .level-@{index} {
+    //prevents the text from floating out
+    margin-right: (@index * 20) px;
+    .indented {
+      position: relative;
+      left: (@index * 20) px;
+    }
+  }
+  .loopingClass(@index - 1);
+}
+
+.loopingClass (0) {}
+
+.loopingClass (@levels);
