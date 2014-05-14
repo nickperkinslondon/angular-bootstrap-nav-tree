@@ -66,7 +66,15 @@ There is a short-form for listing nodes children (as used for "children" above),
 If you use the short-form for listing elements, then your "on-select" function will have to act based only upon the "branch.label".  If you use the 
 long-form, where is branch is an object, then you can also attach "data" to a branch.
 
+If you would like to add classes to a certain node, give it an array of classes like so:
 
+    $scope.my_data = [{
+      label: 'Languages',
+      children: ['Jade','Less','Coffeescript']
+      classes: ["special", "red"]
+    }]
+
+Each element without children, or leaf, is automatically given a leaf class.
 
 You can supply a single default "on-select" function for the whole tree -- it will be called whenever a branch is selected:
 
