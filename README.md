@@ -74,7 +74,12 @@ If you would like to add classes to a certain node, give it an array of classes 
       classes: ["special", "red"]
     }]
 
-Each element without children, or leaf, is automatically given a leaf class.
+Each element without children, or leaf, is automatically given a leaf class. If you would like to force certain nodes not to be leaves (won't get leaf class and will show expand/collapse icons), set noLeaf to true in a long-form listing like so:
+
+    {
+      label: 'Coffeescript',
+      noLeaf: true
+    }
 
 You can supply a single default "on-select" function for the whole tree -- it will be called whenever a branch is selected:
 

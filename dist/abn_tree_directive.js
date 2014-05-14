@@ -191,7 +191,7 @@
               if (branch.classes == null) {
                 branch.classes = [];
               }
-              if (!branch.children || branch.children.length === 0) {
+              if (!branch.noLeaf && (!branch.children || branch.children.length === 0)) {
                 tree_icon = attrs.iconLeaf;
                 if (__indexOf.call(branch.classes, "leaf") < 0) {
                   branch.classes.push("leaf");
