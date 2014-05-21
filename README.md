@@ -22,8 +22,6 @@ Just include the 2 files from "dist":
     abn_tree_directive.js
     abn_tree.css
 
-NOTE: you will have to adjust the "templateUrl" in the directive js, to adjust for your directory structure.
-
 
 Then put an `<abn-tree>` directive in your HTML.
 ( see the example in "test" )
