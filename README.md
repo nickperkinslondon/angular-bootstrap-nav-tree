@@ -25,6 +25,7 @@ Just include the 3 files from "dist":
 
 NOTE: you will have to adjust the "templateUrl" in the directive js, to adjust for your directory structure.
 
+Add `'angularBootstrapNavTree'` to your module's list of dependencies.
 
 Then put an `<abn-tree>` directive in your HTML.
 ( see the example in "test" )
