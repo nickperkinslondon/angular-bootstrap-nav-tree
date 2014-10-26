@@ -1,4 +1,3 @@
-
 module = angular.module 'angularBootstrapNavTree',[]
 
 module.directive 'abnTree',['$timeout',($timeout)-> 
@@ -144,23 +143,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
     on_treeData_change = ->
 
       #console.log 'tree-data-change!'
-
-      # give each Branch a UID ( to keep AngularJS happy )
-      for_each_branch (b,level)->
-        if not b.uid
-          b.uid = ""+Math.random()
-      console.log 'UIDs are set.'
-
-
-      # set all parents:
-      for_each_branch (b)->
-        if angular.isArray b.children
-          for child in b.children
-            child.parent_uid = b.uid
-
-
-      scope.tree_rows = []
-
+      
       #
       # if "children" is just a list of strings...
       # ...change them into objects:
@@ -179,6 +162,23 @@ module.directive 'abnTree',['$timeout',($timeout)->
 
         else
           branch.children = []
+
+
+      # give each Branch a UID ( to keep AngularJS happy )
+      for_each_branch (b,level)->
+        if not b.uid
+          b.uid = ""+Math.random()
+      console.log 'UIDs are set.'
+
+
+      # set all parents:
+      for_each_branch (b)->
+        if angular.isArray b.children
+          for child in b.children
+            child.parent_uid = b.uid
+
+
+      scope.tree_rows = []
 
       
       #
