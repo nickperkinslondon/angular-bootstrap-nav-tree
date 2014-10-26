@@ -17,13 +17,10 @@ This tree is developed using CoffeeScript and Jade, but you don't need to be usi
 
 
 How to use it:
-Just include the 3 files from "dist":
+Just include the 2 files from "dist",
 
     abn_tree_directive.js
-    abn_tree_template.html
     abn_tree.css
-
-NOTE: you will have to adjust the "templateUrl" in the directive js, to adjust for your directory structure.
 
 Add `'angularBootstrapNavTree'` to your module's list of dependencies.
 
