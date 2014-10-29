@@ -4,7 +4,7 @@ ul.nav.nav-list.nav-pills.nav-stacked.abn-tree
   li.abn-tree-row(
     ng-repeat='row in tree_rows | filter:{visible:true} track by row.branch.uid'
     ng-animate="'abn-tree-animate'"
-    ng-class="'level-' + {{ row.level }} + (row.branch.selected ? ' active':'')"
+    ng-class="'level-' + {{ row.level }} + (row.branch.selected ? ' active':'') + ' ' +row.classes.join(' ')"
     )
 
     a(ng-click="user_clicks_branch(row.branch)")

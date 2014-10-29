@@ -190,13 +190,17 @@ module.directive 'abnTree',['$timeout',($timeout)->
         if not branch.expanded?
           branch.expanded = false
 
+        if not branch.classes?
+          branch.classes = []
+
         #
         # icons can be Bootstrap or Font-Awesome icons:
         # they will be rendered like:
         # <i class="icon-plus"></i>
         #
-        if not branch.children or branch.children.length == 0 
+        if not branch.noLeaf and (not branch.children or branch.children.length == 0)
           tree_icon = attrs.iconLeaf
+          branch.classes.push "leaf" if "leaf" not in branch.classes
         else
           if branch.expanded
             tree_icon = attrs.iconCollapse
@@ -211,6 +215,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
           level     : level
           branch    : branch
           label     : branch.label
+          classes   : branch.classes
           tree_icon : tree_icon
           visible   : visible
 
