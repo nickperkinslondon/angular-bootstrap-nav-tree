@@ -297,6 +297,13 @@ module.directive('abnTree', [
               }
               return new_branch;
             };
+            tree.remove_branch = function(branch) {
+              select_branch(branch);
+              parent = scope.treeControl.select_parent_branch();
+              if(parent){
+                parent.children.splice(parent.children.indexOf(branch),1);
+              }
+            };
             tree.add_root_branch = function(new_branch) {
               tree.add_branch(null, new_branch);
               return new_branch;
