@@ -3,7 +3,7 @@ Package.describe({
   version: '0.2.0',
   summary: 'angular-bootstrap-nav-tree (official) for Meteor',
   git: 'https://github.com/nickperkinslondon/angular-bootstrap-nav-tree',
-  documentation: 'README.md'
+  documentation: null
 });
 
 Package.onUse(function (api) {
