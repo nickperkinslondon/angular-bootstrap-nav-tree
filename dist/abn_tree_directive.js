@@ -135,25 +135,6 @@
           scope.tree_rows = [];
           on_treeData_change = function() {
             var add_branch_to_list, root_branch, _i, _len, _ref, _results;
-            for_each_branch(function(b, level) {
-              if (!b.uid) {
-                return b.uid = "" + Math.random();
-              }
-            });
-            console.log('UIDs are set.');
-            for_each_branch(function(b) {
-              var child, _i, _len, _ref, _results;
-              if (angular.isArray(b.children)) {
-                _ref = b.children;
-                _results = [];
-                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                  child = _ref[_i];
-                  _results.push(child.parent_uid = b.uid);
-                }
-                return _results;
-              }
-            });
-            scope.tree_rows = [];
             for_each_branch(function(branch) {
               var child, f;
               if (branch.children) {
@@ -183,6 +164,25 @@
                 return branch.children = [];
               }
             });
+            for_each_branch(function(b, level) {
+              if (!b.uid) {
+                return b.uid = "" + Math.random();
+              }
+            });
+            console.log('UIDs are set.');
+            for_each_branch(function(b) {
+              var child, _i, _len, _ref, _results;
+              if (angular.isArray(b.children)) {
+                _ref = b.children;
+                _results = [];
+                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                  child = _ref[_i];
+                  _results.push(child.parent_uid = b.uid);
+                }
+                return _results;
+              }
+            });
+            scope.tree_rows = [];
             add_branch_to_list = function(level, branch, visible) {
               var child, child_visible, tree_icon, _i, _len, _ref, _results;
               if (branch.expanded == null) {
@@ -192,15 +192,15 @@
                 branch.classes = [];
               }
               if (!branch.noLeaf && (!branch.children || branch.children.length === 0)) {
-                tree_icon = attrs.iconLeaf;
+                tree_icon = branch.iconLeaf ? branch.iconLeaf : attrs.iconLeaf;
                 if (__indexOf.call(branch.classes, "leaf") < 0) {
                   branch.classes.push("leaf");
                 }
               } else {
                 if (branch.expanded) {
-                  tree_icon = attrs.iconCollapse;
+                  tree_icon = branch.iconCollapse ? branch.iconCollapse : attrs.iconCollapse;
                 } else {
-                  tree_icon = attrs.iconExpand;
+                  tree_icon = branch.iconExpand ? branch.iconExpand : attrs.iconExpand;
                 }
               }
               scope.tree_rows.push({
