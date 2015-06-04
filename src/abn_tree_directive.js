@@ -246,6 +246,9 @@ module.directive('abnTree', [
                 return b.expanded = true;
               });
             };
+            tree.expand_all_parents = function(child) {
+              return expand_all_parents(child);
+            };
             tree.collapse_all = function() {
               return for_each_branch(function(b, level) {
                 return b.expanded = false;
