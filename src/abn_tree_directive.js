@@ -290,9 +290,11 @@ module.directive('abnTree', [
             };
             tree.add_branch = function(parent, new_branch) {
               if (parent != null) {
+				new_branch.level = parent.level + 1;
                 parent.children.push(new_branch);
                 parent.expanded = true;
               } else {
+				new_branch.level = 1;
                 scope.treeData.push(new_branch);
               }
               return new_branch;
