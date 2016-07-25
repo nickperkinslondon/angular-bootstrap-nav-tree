@@ -21,6 +21,22 @@ app.controller 'AbnTestController',($scope,$timeout)->
     # ...but your handler could do anything here...
     # 
 
+  #
+  # a default "on-check" handler can be specified
+  # for the tree ( as attribute "on-check" )
+  #   
+  $scope.my_tree_check = (checkedes)->
+    $scope.output = "You checked: "
+    if !!checkedes && checkedes.length > 0
+      for branch in checkedes
+        $scope.output += branch.label
+        if branch.data?.description
+          $scope.output += '('+branch.data.description+')'
+    #
+    # This example handler just sets "output",
+    # ...but your handler could do anything here...
+    # 
+
 
   #
   # Each branch can define an "on-select" handler,
@@ -61,10 +77,12 @@ app.controller 'AbnTestController',($scope,$timeout)->
         description:"man's best friend"
     , 
       label:'Cat'
+      uid:'02'
       data:
         description:"Felis catus"
     ,
       label:'Hippopotamus'
+      uid:'03'
       data:
         description:"hungry, hungry"
     ,
@@ -74,6 +92,7 @@ app.controller 'AbnTestController',($scope,$timeout)->
   ,
 
     label:'Vegetable'
+    uid:"2"
     data:
       definition:"A plant or part of a plant used as food, typically as accompaniment to meat or fish, such as a cabbage, potato, carrot, or bean."
       data_can_contain_anything:true
@@ -81,6 +100,12 @@ app.controller 'AbnTestController',($scope,$timeout)->
     onSelect:(branch)->
       # special "on-select" function for this branch
       $scope.output = "Vegetable: "+branch.data.definition
+    onCheck:(branch)->
+      # special "on-check" function for this branch
+      if branch.checked == 2
+        $scope.output = "Check Vegetable: "+branch.data.definition
+      else
+        $scope.output = "UnCheck Vegetable: "+branch.data.definition
       
 
     children:[
@@ -146,7 +171,6 @@ app.controller 'AbnTestController',($scope,$timeout)->
       children:['Buenos Aires','Cordoba']
     ]
   ]
-
 
   $scope.my_data = treedata_avm
   $scope.try_changing_the_tree_data = ()->

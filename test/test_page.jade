@@ -7,19 +7,19 @@ html(ng-app='AbnTest')
 		// Bootstrap 2 or Bootstrap 3 ?
 		//
 		if bs == "2"
-			link(rel="stylesheet",href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css")
+			link(rel="stylesheet",href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap-combined.min.css")
 		if bs == "3"
-			link(rel="stylesheet",href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css")
+			link(rel="stylesheet",href="http://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.min.css")
 
 
 		//
 		// Angular 1.1.5 or 1.2.12 ?
 		//
 		if ng == "1.1.5"
-			script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js")
+			script(src="http://cdn.bootcss.com/angular.js/angularjs/1.1.5/angular.js")
 		if ng == "1.2.12"
-			script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.js")
-			script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-animate.js")
+			script(src="http://cdn.bootcss.com/angular.js/1.2.12/angular.js")
+			script(src="http://cdn.bootcss.com/angular.js/1.2.12/angular-animate.js")
 
 
 		// Font Awesome (optional)
@@ -162,8 +162,10 @@ html(ng-app='AbnTest')
 										tree-data         = "my_data"
 										tree-control      = "my_tree"
 										on-select         = "my_tree_handler(branch)"
+										on-check					= "my_tree_check(checkedes)"
 										expand-level      = "2"
 										initial-selection = "Granny Smith"
+										initial-checked		= "['02','03','2']"
 										)
 
 							td(style="padding:20px;vertical-align:top;")

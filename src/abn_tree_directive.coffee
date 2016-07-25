@@ -10,7 +10,9 @@ module.directive 'abnTree',['$timeout',($timeout)->
   scope:
     treeData:'='
     onSelect:'&'
+    onCheck:'&'
     initialSelection:'@'
+    initialChecked:'='
     treeControl:'='
 
   link:(scope,element,attrs)->
@@ -27,6 +29,10 @@ module.directive 'abnTree',['$timeout',($timeout)->
     attrs.iconCollapse ?= 'icon-minus glyphicon glyphicon-minus fa fa-minus'
     attrs.iconLeaf     ?= 'icon-file  glyphicon glyphicon-file  fa fa-file'
 
+    attrs.iconChecked       ?= 'icon-check       glyphicon glyphicon-check      fa fa-check-square'    
+    attrs.iconUnchecked     ?= 'icon-check-empty glyphicon glyphicon-unchecked  fa fa-square'
+    attrs.iconSomeChecked   ?= 'icon-sign-blank  glyphicon glyphicon-stop       fa fa-square-o'
+
     attrs.expandLevel  ?= '3'
 
     expand_level = parseInt attrs.expandLevel,10
@@ -42,6 +48,37 @@ module.directive 'abnTree',['$timeout',($timeout)->
       else
         alert 'treeData should be an array of root branches'
         return
+
+
+    # 
+    # 
+    # 
+    do_for_each_branch = (branch, fn)->
+      do_f = (branch)->
+        if !!branch.children && branch.children.length > 0
+          for child in branch.children
+            fn(branch, child)
+            do_f(child)
+        else
+          fn(branch, null)
+        return
+
+      do_f(branch)
+
+    #
+    #
+    #
+    do_for_each_ancestors = (branch, fn)->
+      do_f = (branch)->
+        p = get_parent(branch)
+        if !!p
+          fn(branch, p)
+          do_f(p)
+        else
+          fn(branch, null)
+        return
+
+      do_f(branch)
 
 
     #
@@ -105,6 +142,78 @@ module.directive 'abnTree',['$timeout',($timeout)->
       if branch isnt selected_branch
          select_branch(branch)
 
+    #
+    # checked
+    # 
+    _v_checked      = 2
+    _v_check_some   = 1
+    _v_unchecked    = 0
+    # checked_branch = []
+
+    get_checked = ()->
+      checked_branch = []
+      do_f = (branch)->
+        if branch.checked == _v_checked
+          checked_branch.push(branch)
+        else if branch.checked == _v_check_some
+          for child in branch.children
+            do_f(child)
+
+      for root_branch in scope.treeData
+        do_f(root_branch)
+
+      return checked_branch
+
+    check_branch = (branch)->
+
+      if !branch.checked
+        branch.checked = _v_checked
+      else if branch.checked == _v_checked
+        branch.checked = _v_unchecked
+      else if branch.checked == _v_check_some
+        branch.checked = _v_checked
+      else if branch.checked == _v_unchecked
+        branch.checked = _v_checked
+
+      # child
+      do_for_each_branch branch, (branch, child)->
+        return if !child
+        child.checked = branch.checked
+
+      # parent
+      do_for_each_ancestors branch, (branch, parent)->
+        if !!parent
+          children = parent.children
+          total     = children.length
+          checked   = 0
+          unchecked = 0
+          for child in children
+            checked   += 1 if child.checked == _v_checked
+            unchecked += 1 if child.checked == _v_unchecked
+
+          if total == checked
+            parent.checked = _v_checked
+          else if total == unchecked
+            parent.checked == _v_unchecked
+          else
+            parent.checked = _v_check_some
+
+      #
+      # check:
+      # 1) branch.onCheck
+      # 2) tree.onCheck
+      #
+      if branch.onCheck?
+        $timeout ->
+          branch.onCheck(branch)
+      else
+        if scope.onCheck?
+          $timeout ->
+            scope.onCheck({checkedes:get_checked()})
+
+
+    scope.user_check_branch = (branch)->
+      check_branch branch
 
     get_parent = (child)->
       parent = undefined
@@ -190,8 +299,23 @@ module.directive 'abnTree',['$timeout',($timeout)->
         if not branch.expanded?
           branch.expanded = false
 
+        if !branch.checked
+          branch.checked = _v_unchecked
+
         if not branch.classes?
           branch.classes = []
+
+        #
+        # icons can be Bootstrap or Font-Awesome icons:
+        # they will be rendered like:
+        # <i class="icon-square"></i>
+        #
+        if branch.checked == _v_checked
+          tree_check_icon = attrs.iconChecked
+        else if branch.checked == _v_check_some
+          tree_check_icon = attrs.iconSomeChecked
+        else 
+          tree_check_icon = attrs.iconUnchecked
 
         #
         # icons can be Bootstrap or Font-Awesome icons:
@@ -212,12 +336,13 @@ module.directive 'abnTree',['$timeout',($timeout)->
         # append to the list of "Tree Row" objects:
         #
         scope.tree_rows.push
-          level     : level
-          branch    : branch
-          label     : branch.label
-          classes   : branch.classes
-          tree_icon : tree_icon
-          visible   : visible
+          level           : level
+          branch          : branch
+          label           : branch.label
+          classes         : branch.classes
+          tree_icon       : tree_icon
+          tree_check_icon : tree_check_icon
+          visible         : visible
 
         #
         # recursively add all children of this branch...( at Level+1 )
@@ -256,6 +381,21 @@ module.directive 'abnTree',['$timeout',($timeout)->
         if b.label == attrs.initialSelection
           $timeout ->
             select_branch b
+
+    #
+    # initial-checked="[]"
+    # if specified, find and check the branch:
+    #
+    if scope.initialChecked? && scope.initialChecked.length > 0
+      console.log scope.initialChecked
+      for_each_branch (b)->
+        for checked in scope.initialChecked
+          if b.uid == checked
+            $timeout ->
+              check_branch b
+      
+
+    
 
     #
     # expand to the proper level
@@ -298,6 +438,9 @@ module.directive 'abnTree',['$timeout',($timeout)->
 
         tree.get_selected_branch = ->
           selected_branch
+
+        tree.get_checked = ->
+          get_checked
 
         tree.get_parent_branch = (b)->
           get_parent(b)
