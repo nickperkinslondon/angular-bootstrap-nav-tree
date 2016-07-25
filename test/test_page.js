@@ -18,6 +18,23 @@
         return $scope.output += '(' + branch.data.description + ')';
       }
     };
+    $scope.my_tree_check = function(checkedes) {
+      var branch, _i, _len, _ref, _results;
+      $scope.output = "You checked: ";
+      if (!!checkedes && checkedes.length > 0) {
+        _results = [];
+        for (_i = 0, _len = checkedes.length; _i < _len; _i++) {
+          branch = checkedes[_i];
+          $scope.output += branch.label;
+          if ((_ref = branch.data) != null ? _ref.description : void 0) {
+            _results.push($scope.output += '(' + branch.data.description + ')');
+          } else {
+            _results.push(void 0);
+          }
+        }
+        return _results;
+      }
+    };
     apple_selected = function(branch) {
       return $scope.output = "APPLE! : " + branch.label;
     };
@@ -32,11 +49,13 @@
             }
           }, {
             label: 'Cat',
+            uid: '02',
             data: {
               description: "Felis catus"
             }
           }, {
             label: 'Hippopotamus',
+            uid: '03',
             data: {
               description: "hungry, hungry"
             }
@@ -47,12 +66,20 @@
         ]
       }, {
         label: 'Vegetable',
+        uid: "2",
         data: {
           definition: "A plant or part of a plant used as food, typically as accompaniment to meat or fish, such as a cabbage, potato, carrot, or bean.",
           data_can_contain_anything: true
         },
         onSelect: function(branch) {
           return $scope.output = "Vegetable: " + branch.data.definition;
+        },
+        onCheck: function(branch) {
+          if (branch.checked === 2) {
+            return $scope.output = "Check Vegetable: " + branch.data.definition;
+          } else {
+            return $scope.output = "UnCheck Vegetable: " + branch.data.definition;
+          }
         },
         children: [
           {
