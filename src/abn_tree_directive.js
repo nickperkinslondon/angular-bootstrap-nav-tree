@@ -31,6 +31,9 @@ module.directive('abnTree', [
         if (attrs.iconLeaf == null) {
           attrs.iconLeaf = 'icon-file  glyphicon glyphicon-file  fa fa-file';
         }
+        if (attrs.expandOnClick == null) {
+            attrs.expandOnClick = 'false';
+          }
         if (attrs.expandLevel == null) {
           attrs.expandLevel = '3';
         }
@@ -102,10 +105,30 @@ module.directive('abnTree', [
           }
         };
         scope.user_clicks_branch = function(branch) {
-          if (branch !== selected_branch) {
-            return select_branch(branch);
-          }
+          if (attrs.expandOnClick) {
+              if (branch.close_from_icon) {
+                branch.close_from_icon = false;
+                return select_branch(branch);
+              }
+              if (!branch.expanded) {
+                branch.expanded = true;
+              } else if (branch.selected && !branch.open_from_icon) {
+                branch.expanded = false;
+                branch.open_from_icon = false;
+              }
+            }
+            if (branch !== selected_branch) {
+              return select_branch(branch);
+            }
         };
+        scope.user_clicks_icon = function(branch) {
+            if (branch.expanded) {
+              branch.close_from_icon = true;
+            } else {
+              branch.open_from_icon = true;
+            }
+            return branch.expanded = !branch.expanded;
+          };
         get_parent = function(child) {
           var parent;
           parent = void 0;
@@ -135,10 +158,12 @@ module.directive('abnTree', [
         on_treeData_change = function() {
           var add_branch_to_list, root_branch, _i, _len, _ref, _results;
           for_each_branch(function(b, level) {
-            if (!b.uid) {
-              return b.uid = "" + Math.random();
-            }
-          });
+              if (!b.uid) {
+                b.close_from_icon = false;
+                b.open_from_icon = false;
+                return b.uid = "" + Math.random();
+              }
+            });
           console.log('UIDs are set.');
           for_each_branch(function(b) {
             var child, _i, _len, _ref, _results;

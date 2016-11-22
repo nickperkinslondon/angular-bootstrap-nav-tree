@@ -33,7 +33,7 @@ At a miniumum, you must supply `tree-data` :
 
 But there are other attributes to customize the tree:
 
-    <abn-tree 
+    <abn-tree
         tree-data         = "my_treedata"
         tree-control      = "my_tree"
         icon-leaf         = "icon-file"
@@ -41,14 +41,15 @@ But there are other attributes to customize the tree:
         icon-collapse     = "icon-minus-sign"
         on-select         = "my_tree_handler(branch)"
         expand-level      = "2"
-        initial-selection = "Vegetable">      
+        initial-selection = "Vegetable"
+        expand-on-click   = "true">      
     ></abn-tree>
 
 The example uses Font-Awesome 3, but Font-Awsome 4 also works.
 Use the following syntax:
 
     icon-leaf = "fa fa-file"
-    
+
 ( in general, use spaces to apply multiple classes to icon elements )
 
 
@@ -61,7 +62,7 @@ The data to create the tree is defined in your controller, and could be as simpl
 
 There is a long-form for elements, in which each node is an object with a "label", and optionally other stuff like "data", and "children".
 There is a short-form for listing nodes children (as used for "children" above), where the "children" is just a list of strings.
-If you use the short-form for listing elements, then your "on-select" function will have to act based only upon the "branch.label".  If you use the 
+If you use the short-form for listing elements, then your "on-select" function will have to act based only upon the "branch.label".  If you use the
 long-form, where is branch is an object, then you can also attach "data" to a branch.
 
 If you would like to add classes to a certain node, give it an array of classes like so:
@@ -91,7 +92,7 @@ Or, you can put a custom "on-select" function on an individual branch:
       onSelect: function(branch){...},
       children: ['Jade','Less','Coffeescript']
     }]
-    
+
 Each branch can have a "data" element which you can use to hold whatever data you want.  It is not touched by the tree, and it is available to your "on-select" function as "branch.data".  In the example, in the "test" folder, this technique is used in "my_tree_handler" to add extra info to "Dog","Cat", and "Hippo".  
 
 Warning: If you attach extra attributes directly to a branch (instead of to "branch.data"), they could conflict with the internal workings of the tree, which adds branch attributes at runtime, like "expanded" and "selected".

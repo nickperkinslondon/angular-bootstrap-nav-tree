@@ -11,7 +11,7 @@ ul.nav.nav-list.nav-pills.nav-stacked.abn-tree
 
       i.indented.tree-icon(
         ng-class="row.tree_icon"
-        ng-click="row.branch.expanded = !row.branch.expanded"
+        ng-click="user_clicks_icon(row.branch)"
         ) 
 
       span.indented.tree-label {{ row.label }} 
