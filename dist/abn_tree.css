@@ -119,3 +119,8 @@ ul.nav.nav-list.abn-tree .level-9 .indented {
   position: relative;
   left: 160px;
 }
+
+.branch-btn{
+  font-size:150%;
+  margin: 0 5px;
+}

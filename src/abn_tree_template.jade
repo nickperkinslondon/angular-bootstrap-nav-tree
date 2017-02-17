@@ -14,4 +14,12 @@ ul.nav.nav-list.nav-pills.nav-stacked.abn-tree
         ng-click="row.branch.expanded = !row.branch.expanded"
         ) 
 
-      span.indented.tree-label {{ row.label }} 
+      span.indented.tree-label {{ row.label }}
+      span(ng-repeat="button in buttons")
+      span.pull-right(ng-show="row.branch.selected && !row.branch[button.hideKey]")
+        i.fa.branch-btn(
+          ng-click="button.onClick()"
+          ng-class="button.icon"
+          aria-hidden="true"
+          )
+          md-tooltip(ng-show="button.tooltip") {{ button.tooltip }}

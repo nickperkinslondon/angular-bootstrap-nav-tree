@@ -12,6 +12,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
     onSelect:'&'
     initialSelection:'@'
     treeControl:'='
+    buttons: '='
 
   link:(scope,element,attrs)->
 
