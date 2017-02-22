@@ -16,10 +16,10 @@ ul.nav.nav-list.nav-pills.nav-stacked.abn-tree
 
       span.indented.tree-label {{ row.label }}
       span(ng-repeat="button in buttons")
-      span.pull-right(ng-show="row.branch.selected && !row.branch[button.hideKey]")
-        i.fa.branch-btn(
-          ng-click="button.onClick()"
-          ng-class="button.icon"
-          aria-hidden="true"
-          )
-          md-tooltip(ng-show="button.tooltip") {{ button.tooltip }}
+        span.pull-right(ng-show="row.branch.selected && !row.branch[button.hideKey]")
+          i.fa.branch-btn(
+            ng-click="button.onClick()"
+            ng-class="button.icon"
+            aria-hidden="true"
+            )
+            md-tooltip(ng-show="button.tooltip") {{ button.tooltip }}
