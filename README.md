@@ -54,7 +54,7 @@ Use the following syntax:
 
 The data to create the tree is defined in your controller, and could be as simple as this:
 
-    $scope.my_data = [{
+    $scope.my_treedata = [{
       label: 'Languages',
       children: ['Jade','Less','Coffeescript']
     }]
@@ -66,7 +66,7 @@ long-form, where is branch is an object, then you can also attach "data" to a br
 
 If you would like to add classes to a certain node, give it an array of classes like so:
 
-    $scope.my_data = [{
+    $scope.my_treedata = [{
       label: 'Languages',
       children: ['Jade','Less','Coffeescript']
       classes: ["special", "red"]
@@ -86,7 +86,7 @@ You can supply a single default "on-select" function for the whole tree -- it wi
 
 Or, you can put a custom "on-select" function on an individual branch:
 
-    $scope.my_data = [{
+    $scope.my_treedata = [{
       label: 'Languages',
       onSelect: function(branch){...},
       children: ['Jade','Less','Coffeescript']

@@ -1,6 +1,10 @@
 {
   "name": "angular-bootstrap-nav-tree",
   "version": "0.2.0",
+  "repository":{
+    "type":"git",
+    "url":"git://github.com/nickperkinslondon/angular-bootstrap-nav-tree"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -10,5 +14,5 @@
     "grunt-string-replace": "~0.2.7"
   },
   "keywords":["angularjs","bootstrap","tree","widget"],
-  "licence":"MIT"
+  "license":"MIT"
 }
