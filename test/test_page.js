@@ -59,16 +59,21 @@
             label: 'Oranges'
           }, {
             label: 'Apples',
+            iconCollapse: 'icon-hand-down glyphicon glyphicon-hand-down fa fa-hand-down',
+            iconExpand: 'icon-hand-right  glyphicon glyphicon-hand-right  fa fa-hand-right',
             children: [
               {
                 label: 'Granny Smith',
-                onSelect: apple_selected
+                onSelect: apple_selected,
+                iconLeaf: 'icon-heart-empty  glyphicon glyphicon-heart-empty  fa fa-heart-empty'
               }, {
                 label: 'Red Delicous',
-                onSelect: apple_selected
+                onSelect: apple_selected,
+                iconLeaf: 'icon-star  glyphicon glyphicon-star  fa fa-star'
               }, {
                 label: 'Fuji',
-                onSelect: apple_selected
+                onSelect: apple_selected,
+                iconLeaf: 'icon-music  glyphicon glyphicon-music  fa fa-music'
               }
             ]
           }
