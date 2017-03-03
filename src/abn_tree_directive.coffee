@@ -37,8 +37,8 @@ module.directive 'abnTree',['$timeout',($timeout)->
       return
 
     if !scope.treeData.length?
-      if treeData.label?
-        scope.treeData = [ treeData ]
+      if scope.treeData.label?
+        scope.treeData = [ scope.treeData ]
       else
         alert 'treeData should be an array of root branches'
         return
