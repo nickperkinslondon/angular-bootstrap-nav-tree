@@ -10,6 +10,10 @@ ul.nav.nav-list.nav-pills.nav-stacked.abn-tree
     a(ng-click="user_clicks_branch(row.branch)")
 
       i.indented.tree-icon(
+        ng-class="row.tree_check_icon"
+        ng-click="user_check_branch(row.branch)"
+        ) 
+      i.indented.tree-icon(
         ng-class="row.tree_icon"
         ng-click="row.branch.expanded = !row.branch.expanded"
         ) 

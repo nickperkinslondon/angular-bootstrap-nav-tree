@@ -162,8 +162,10 @@ html(ng-app='AbnTest')
 										tree-data         = "my_data"
 										tree-control      = "my_tree"
 										on-select         = "my_tree_handler(branch)"
+										on-check					= "my_tree_check(checkedes)"
 										expand-level      = "2"
 										initial-selection = "Granny Smith"
+										initial-checked		= "['02','03','2']"
 										)
 
 							td(style="padding:20px;vertical-align:top;")
