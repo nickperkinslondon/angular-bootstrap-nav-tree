@@ -64,7 +64,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
     # only one branch can be selected at a time
     # 
     selected_branch = null
-    select_branch = (branch)->
+    select_branch = (branch, user = false)->
 
       if not branch
         if selected_branch?
@@ -94,16 +94,16 @@ module.directive 'abnTree',['$timeout',($timeout)->
           # before calling the "onSelect" function.
           #
           $timeout ->
-            branch.onSelect(branch)
+            branch.onSelect(branch, user)
         else
           if scope.onSelect?
             $timeout ->
-              scope.onSelect({branch:branch})
+              scope.onSelect({branch:branch, user: user})
 
 
     scope.user_clicks_branch = (branch)->
       if branch isnt selected_branch
-         select_branch(branch)
+         select_branch(branch, true)
 
 
     get_parent = (child)->
@@ -467,13 +467,3 @@ module.directive 'abnTree',['$timeout',($timeout)->
               tree.select_branch(prev)
               return prev
 ]
-
-
-
-
-
-
-
-
-
-
