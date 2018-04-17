@@ -12,6 +12,7 @@ module.directive('abnTree', [
       scope: {
         treeData: '=',
         onSelect: '&',
+        onExpand: '&',
         initialSelection: '@',
         treeControl: '='
       },
@@ -23,13 +24,13 @@ module.directive('abnTree', [
           return void 0;
         };
         if (attrs.iconExpand == null) {
-          attrs.iconExpand = 'icon-plus  glyphicon glyphicon-plus  fa fa-plus';
+          attrs.iconExpand = 'zmdi zmdi-plus';
         }
         if (attrs.iconCollapse == null) {
-          attrs.iconCollapse = 'icon-minus glyphicon glyphicon-minus fa fa-minus';
+          attrs.iconCollapse = 'zmdi zmdi-minus';
         }
         if (attrs.iconLeaf == null) {
-          attrs.iconLeaf = 'icon-file  glyphicon glyphicon-file  fa fa-file';
+          attrs.iconLeaf = 'zmdi zmdi-file';
         }
         if (attrs.expandLevel == null) {
           attrs.expandLevel = '3';
@@ -186,13 +187,15 @@ module.directive('abnTree', [
             if (branch.expanded == null) {
               branch.expanded = false;
             }
-            if (!branch.children || branch.children.length === 0) {
+            if (!branch.children || (branch.children.length === 0 && !branch.hasChild)) {
               tree_icon = attrs.iconLeaf;
             } else {
               if (branch.expanded) {
                 tree_icon = attrs.iconCollapse;
-              } else {
+              } else if (branch.hasChild) {
                 tree_icon = attrs.iconExpand;
+              } else {
+                tree_icon = attrs.iconLeaf;
               }
             }
             scope.tree_rows.push({
