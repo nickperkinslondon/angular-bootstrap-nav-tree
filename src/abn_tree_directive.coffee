@@ -10,6 +10,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
   scope:
     treeData:'='
     onSelect:'&'
+    onExpand: '&'
     initialSelection:'@'
     treeControl:'='
 
@@ -22,10 +23,10 @@ module.directive 'abnTree',['$timeout',($timeout)->
       return undefined
 
 
-    # default values ( Font-Awesome 3 or 4 or Glyphicons )
-    attrs.iconExpand   ?= 'icon-plus  glyphicon glyphicon-plus  fa fa-plus'    
-    attrs.iconCollapse ?= 'icon-minus glyphicon glyphicon-minus fa fa-minus'
-    attrs.iconLeaf     ?= 'icon-file  glyphicon glyphicon-file  fa fa-file'
+    # default values ( Font-Awesome 3 or 4 or zmdis )
+    attrs.iconExpand   ?= 'zmdi zmdi-plus'   
+    attrs.iconCollapse ?= 'zmdi zmdi-minus'
+    attrs.iconLeaf     ?= 'zmdi zmdi-file'
 
     attrs.expandLevel  ?= '3'
 
@@ -198,14 +199,16 @@ module.directive 'abnTree',['$timeout',($timeout)->
         # they will be rendered like:
         # <i class="icon-plus"></i>
         #
-        if not branch.noLeaf and (not branch.children or branch.children.length == 0)
+        if not branch.children or (branch.children.length == 0 or not branch.hasClid)
           tree_icon = attrs.iconLeaf
-          branch.classes.push "leaf" if "leaf" not in branch.classes
-        else
-          if branch.expanded
-            tree_icon = attrs.iconCollapse
-          else
-            tree_icon = attrs.iconExpand 
+        else 
+          if branch.expanded 
+            tree_icon = attrs.iconCollapse;
+          else if branch.hasChild
+            tree_icon = attrs.iconExpand;
+          else 
+            tree_icon = attrs.iconLeaf;
+            
 
 
         #
