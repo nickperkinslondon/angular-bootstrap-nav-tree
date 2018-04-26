@@ -72,8 +72,9 @@ ul.abn-tree li.abn-tree-row {
   margin:0px;
 }
 
-ul.abn-tree li.abn-tree-row a {
+ul.abn-tree li.abn-tree-row span {
   padding: 3px 10px;
+  color: blue;
 }
 
 ul.abn-tree i.indented {
