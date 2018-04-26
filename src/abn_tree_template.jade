@@ -7,11 +7,11 @@ ul.nav.nav-list.nav-pills.nav-stacked.abn-tree
     ng-class="'level-' + {{ row.level }} + (row.branch.selected ? ' active':'') + ' ' +row.classes.join(' ')"
     )
 
-    a(ng-click="user_clicks_branch(row.branch)")
+    span
 
       i.indented.tree-icon(
         ng-class="row.tree_icon"
-        ng-click="row.branch.expanded = !row.branch.expanded"
-        ) 
+        ng-click="row.branch.expanded = !row.branch.expanded; onExpand(row)"
+        )
 
-      span.indented.tree-label {{ row.label }} 
+      a(ng-click="user_clicks_branch(row.branch)").indented.tree-label {{ row.label }}

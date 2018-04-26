@@ -24,24 +24,15 @@
     <table>
       <tr>
         <td style="vertical-align:top;padding:20px">
-          <h6>by Nick Perkins</h6>
-          <a href="https://github.com/nickperkinslondon/angular-bootstrap-nav-tree">The code is on Github</a>
+          <h6>by Nick Perkins</h6><a href="https://github.com/nickperkinslondon/angular-bootstrap-nav-tree">The code is on Github</a>
           <!-- All 4 of these pages are generated ( by Grunt ) -->
           <!-- from this one jade file-->
           <hr>
           <ul class="nav nav-list list-group">
-            <li>
-              <a href="bs2_ng115_test_page.html">Bootstrap 2 / Angular 1.1</a>
-            </li>
-            <li>
-              <a href="bs3_ng115_test_page.html">Bootstrap 3 / Angular 1.1</a>
-            </li>
-            <li>
-              <a href="bs2_ng120_test_page.html">Bootstrap 2 / Angular 1.2</a>
-            </li>
-            <li>
-              <a href="bs3_ng120_test_page.html">Bootstrap 3 / Angular 1.2</a>
-            </li>
+            <li><a href="bs2_ng115_test_page.html">Bootstrap 2 / Angular 1.1</a></li>
+            <li><a href="bs3_ng115_test_page.html">Bootstrap 3 / Angular 1.1</a></li>
+            <li><a href="bs2_ng120_test_page.html">Bootstrap 2 / Angular 1.2</a></li>
+            <li><a href="bs3_ng120_test_page.html">Bootstrap 3 / Angular 1.2</a></li>
           </ul>
         </td>
         <td style="vertical-align:top">
@@ -51,22 +42,16 @@
           <hr>
           <table>
             <tr>
-              <td style="vertical-align:top">
-                <br>
-                <button ng-click="try_changing_the_tree_data()" class="btn btn-default btn-sm">Change The Tree Definition</button>
-                <br>
+              <td style="vertical-align:top"><br>
+                <button ng-click="try_changing_the_tree_data()" class="btn btn-default btn-sm">Change The Tree Definition</button><br>
                 <button ng-click="try_async_load()" class="btn btn-default btn-sm">Load Tree Data Asynchronously</button>
                 <hr>
-                <h5>Test the Tree Control API:</h5>
-                <br>
-                <button ng-click="my_tree.select_first_branch()" class="btn btn-default btn-sm">First Branch</button>
-                <br>
+                <h5>Test the Tree Control API:</h5><br>
+                <button ng-click="my_tree.select_first_branch()" class="btn btn-default btn-sm">First Branch</button><br>
                 <button ng-click="my_tree.select_next_sibling()" class="btn btn-default btn-sm">Next Sibling</button>
-                <button ng-click="my_tree.select_prev_sibling()" class="btn btn-default btn-sm">Prev Sibling</button>
-                <br>
+                <button ng-click="my_tree.select_prev_sibling()" class="btn btn-default btn-sm">Prev Sibling</button><br>
                 <button ng-click="my_tree.select_next_branch()" class="btn btn-default btn-sm">Next Branch</button>
-                <button ng-click="my_tree.select_prev_branch()" class="btn btn-default btn-sm">Prev Branch</button>
-                <br>
+                <button ng-click="my_tree.select_prev_branch()" class="btn btn-default btn-sm">Prev Branch</button><br>
                 <button ng-click="my_tree.select_parent_branch()" class="btn btn-default btn-sm">Parent</button>
                 <hr>
                 <button ng-click="my_tree.expand_branch()" class="btn btn-default btn-sm">Expand</button>
@@ -77,8 +62,7 @@
                 <button ng-click="try_adding_a_branch()" class="btn btn-default btn-sm">Add Branch</button>
               </td>
               <td style="vertical-align:top">
-                <div style="width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;">
-                  <span ng-if="doing_async">...loading...</span>
+                <div style="width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;"><span ng-if="doing_async">...loading...</span>
                   <abn-tree tree-data="my_data" tree-control="my_tree" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
                 </div>
               </td>
