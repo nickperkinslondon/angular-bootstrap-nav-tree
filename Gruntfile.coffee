@@ -84,7 +84,10 @@ module.exports = (grunt)->
           'dist/abn_tree_directive.js':'temp/_directive.coffee'
           'test/test_page.js':'test/test_page.coffee'
 
-
+    copy:
+      dist:
+        files:
+          'dist/abn_tree.css' : 'src/abn_tree.css'
 
 
     watch:
@@ -95,9 +98,9 @@ module.exports = (grunt)->
         options:
           livereload:true
 
-      css:
-        files:['**/*.css'] 
-        tasks:[]     
+      copy:
+        files:['src/**/*.css']
+        tasks:['copy']
         options:
           livereload:true
 
@@ -107,13 +110,11 @@ module.exports = (grunt)->
         options:
           livereload:true
 
+  grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-jade'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-string-replace'
 
 
-  grunt.registerTask 'default', ['jade','string-replace','coffee','watch']
-
-
-
+  grunt.registerTask 'default', ['copy','jade','string-replace','coffee','watch']
