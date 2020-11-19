@@ -88,11 +88,13 @@ html(ng-app='AbnTest')
 
 								br	
 								button.btn.btn-default.btn-sm(
+									id="btn_change_tree_definition",
 									ng-click="try_changing_the_tree_data()"
 									) Change The Tree Definition
 
 								br	
 								button.btn.btn-default.btn-sm(
+									id="btn_load_tree_async",
 									ng-click="try_async_load()"
 									) Load Tree Data Asynchronously
 
@@ -101,51 +103,62 @@ html(ng-app='AbnTest')
 
 								br
 								button.btn.btn-default.btn-sm(
+									id="btn_first_branch",
 									ng-click='my_tree.select_first_branch()'
 									) First Branch
 								br
 								button.btn.btn-default.btn-sm(
+									id="btn_next_sibling",
 									ng-click='my_tree.select_next_sibling()'
 									) Next Sibling
 								
 								button.btn.btn-default.btn-sm(
+									id="btn_prev_sibling",
 									ng-click='my_tree.select_prev_sibling()'
 									) Prev Sibling
 
 								br
 								button.btn.btn-default.btn-sm(
+									id="btn_next_branch",
 									ng-click='my_tree.select_next_branch()'
 									) Next Branch
 
 								
 								button.btn.btn-default.btn-sm(
+									id="btn_prev_branch",
 									ng-click='my_tree.select_prev_branch()'
 									) Prev Branch
 
 								br
 								button.btn.btn-default.btn-sm(
+									id="btn_parent",
 									ng-click='my_tree.select_parent_branch()'
 									) Parent
 
 								hr
 								button.btn.btn-default.btn-sm(
+									id="btn_expand",
 									ng-click='my_tree.expand_branch()'
 									) Expand
 
 								button.btn.btn-default.btn-sm(
+									id="btn_collapse",
 									ng-click='my_tree.collapse_branch()'
 									) Collapse
 
 								button.btn.btn-default.btn-sm(
+									id="btn_expand_all",
 									ng-click='my_tree.expand_all()'
 									) Expand All
 
 								button.btn.btn-default.btn-sm(
+									id="btn_collapse_all",
 									ng-click='my_tree.collapse_all()'
 									) Collapse All
 
 								hr
 								button.btn.btn-default.btn-sm(
+									id="btn_add_branch",
 									ng-click='try_adding_a_branch()'
 									) Add Branch
 
@@ -168,5 +181,6 @@ html(ng-app='AbnTest')
 
 							td(style="padding:20px;vertical-align:top;")
 								.alert.alert-warning(
+									id="lbl_output",
 									style="width:300px"
 									) {{ output }}

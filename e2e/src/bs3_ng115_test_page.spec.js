@@ -1,4 +1,5 @@
 var bs3_ng115_test_page = require('./pageObjects/bs3_ng115_test_page');
+var abn_tests = require('./abn_tests.lib');
 
 describe('bs3_ng115_test_page.html', function () {
     beforeEach(async function(){
@@ -20,4 +21,6 @@ describe('bs3_ng115_test_page.html', function () {
         });
         expect(hasBoostrap3).toEqual(true);
     });
+
+    abn_tests.runSharedTests();
 });
