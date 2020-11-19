@@ -1,9 +1,9 @@
-var bs3_ng115_test_page = require('./pageObjects/bs3_ng115_test_page');
+var bs3_ng115_testPage = require('./pageObjects/bs3_ng115_test_page');
 var abn_tests = require('./abn_tests.lib');
 
 describe('bs3_ng115_test_page.html', function () {
     beforeEach(async function(){
-        await bs3_ng115_test_page.get();
+        await bs3_ng115_testPage.go();
     });
 
     it('should use angularJS 1.1.5', function () {
