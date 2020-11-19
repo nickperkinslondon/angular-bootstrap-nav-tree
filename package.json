@@ -4,6 +4,7 @@
   "dependencies": {},
   "main": "main.js",
   "devDependencies": {
+    "astrolabe": "^0.3.6",
     "express": "^4.17.1",
     "grunt": "~0.4.1",
     "grunt-contrib-coffee": "~0.7.0",
