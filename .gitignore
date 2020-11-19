@@ -3,3 +3,10 @@ bower_components/
 temp/
 dist/
 Gruntfile.js
+test/bs2_ng115_test_page.html
+test/bs2_ng120_test_page.html
+test/bs3_ng115_test_page.html
+test/bs3_ng120_test_page.html
+test/bs3_ng200_test_page.html
+test/test_page.js
+test/tests_page.html
